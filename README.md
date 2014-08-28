@@ -1,12 +1,12 @@
-# Project Name
+# CatchEmAll
+Meet interesting new people, capture them, and enjoy the social web you deserve.
 
-> Pithy project description
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Aaron Melocik & Jim O’Brien
+  - __Scrum Master__: Iago Wandalsen-Prates
+  - __Development Team Members__: Wesley Pascual
 
 ## Table of Contents
 
@@ -24,11 +24,8 @@
 
 ## Requirements
 
-- Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- AngularJS
+
 
 ## Development
 
@@ -50,3 +47,4 @@ View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+

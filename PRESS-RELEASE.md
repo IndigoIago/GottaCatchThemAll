@@ -40,7 +40,7 @@ Don’t worry – it’ll be fun. Crazy fun. We’re on that.
 
 
 ## What Iago is saying about CatchEmAll ##
-
+… Iago doesn’t need words. You should already know how great he thinks this is.
 
 ## You’ve practically already joined... ##
 If you have a Google+ or Facebook (or OKCupid?) account, you’re ready to join! Log in to CatchEmAll from one of those sites and we’ll assemble your beginning profile for you!
