@@ -1,0 +1,1 @@
+angular.module('catchem.game', ['catchem.services']);
