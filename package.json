@@ -1,0 +1,23 @@
+{
+  "name": "GottaCatchThemAll",
+  "version": "0.0.1",
+  "description": "Catch the social web you deserve.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IndigoIago/GottaCatchThemAll.git"
+  },
+  "author": "Indigo Iago",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IndigoIago/GottaCatchThemAll/issues"
+  },
+  "homepage": "https://github.com/IndigoIago/GottaCatchThemAll",
+  "dependencies": {
+    "express": "^4.8.6",
+    "jsdoc": "^3.3.0-alpha9"
+  }
+}
