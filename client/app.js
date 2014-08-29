@@ -3,5 +3,5 @@ angular.module('catchem', [
   'catchem.game',
   'catchem.user',
   'catchem.services',
-  'ui.router'
+  'ngRoute'
 ]); // this will remain barebones; it only loads modules.

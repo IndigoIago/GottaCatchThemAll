@@ -1,0 +1,21 @@
+{
+  "name": "catchem",
+  "version": "0.0.1",
+  "homepage": "https://github.com/IndigoIago/GottaCatchThemAll",
+  "authors": [
+    "Team Indigo Iago"
+  ],
+  "main": "app.js",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui-router": "~0.2.11"
+  }
+}
