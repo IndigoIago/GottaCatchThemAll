@@ -1,0 +1,1 @@
+angular.module('catchem.profile', ['catchem.services']);

@@ -1,0 +1,1 @@
+angular.module('catchem.auth', ['catchem.services']);
