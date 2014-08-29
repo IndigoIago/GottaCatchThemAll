@@ -41,7 +41,7 @@ bower install
 
 ### Roadmap
 
-View the [app flowchart](https://www.lucidchart.com/invitations/accept/5c84ee63-ebf2-4aa4-b6a7-d22887f614bc)
+View and update the [app flowchart](https://www.lucidchart.com/invitations/accept/5c84ee63-ebf2-4aa4-b6a7-d22887f614bc)
 
 
 ## Contributing
