@@ -4,7 +4,7 @@ Meet interesting new people, capture them, and enjoy the social web you deserve.
 
 ## Team
 
-  - __Product Owner__: Aaron Melocik & Jim O’Brien
+  - __Product Owner__: Aaron Melocik & Jim Oâ€™Brien
   - __Scrum Master__: Iago Wandalsen-Prates
   - __Development Team Members__: Wesley Pascual
 
@@ -41,7 +41,7 @@ bower install
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+View the [app flowchart](https://www.lucidchart.com/invitations/accept/5c84ee63-ebf2-4aa4-b6a7-d22887f614bc)
 
 
 ## Contributing
