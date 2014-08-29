@@ -3,4 +3,4 @@ angular.module('catchem', [
   'catchem.game',
   'catchem.user',
   'catchem.services'
-]);
+]); // this will remain barebones; it only loads modules.
