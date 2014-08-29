@@ -1,3 +1,4 @@
+
 # CatchEmAll
 Meet interesting new people, capture them, and enjoy the social web you deserve.
 
@@ -30,8 +31,45 @@ Meet interesting new people, capture them, and enjoy the social web you deserve.
 ## Development
 
 ### Installing Dependencies
+You’ll need to have some things installed:
+<a href=http://nodejs.org/>NodeJS</a>
+<a href=http://www.mongodb.org/downloads>MongoDB</a>
 
-From within the root directory:
+
+Run these to ensure your globals are up-to-date:
+```sh 
+sudo npm install -g yo      // for yeoman generators
+sudo npm install -g bower   // for bower package management
+sudo npm install -g nodemon // for nodemon server refreshing
+sudo npm install -g generator-angular // ?????
+sudo npm install -g generator-angular-fullstack // for yeoman fullstack generator
+sudo npm install -g express??? 
+```
+
+We’ll install the MEAN stack from the <a href=” https://github.com/DaftMonk/generator-angular-fullstack“>canon instructions</a>:
+
+```sh
+mkdir my-new-project && cd $_ // create and CD into new dir
+```
+
+```sh
+yo angular-fullstack CatchEmAll // run the yeoman generator with app name
+```
+
+Now is a good time to start running the ```shmongod``` process.
+Next, you can run:
+```sh
+grunt              // for building
+grunt serve        // for preview
+grunt serve:dist   // for preview of the built app
+```
+
+##MORE TO COME, including SUPPORTED CONFIGURATIONS (Jade, Sass, ngRoute, Facebook oAuth… This can all be done in a yeoman install!##
+```sh
+```
+
+
+From within the application directory:
 
 ```sh
 sudo npm install -g bower
