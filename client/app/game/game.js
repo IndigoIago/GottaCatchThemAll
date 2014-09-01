@@ -17,8 +17,4 @@ angular.module('catchem.game', ['catchem.services', 'catchem.profile'])// Load t
     ]
   };
 
-  $scope.$on('roundFinished', function (result) {
-    console.log(result);
-  });
-
 }]); 
