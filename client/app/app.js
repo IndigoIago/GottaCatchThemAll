@@ -4,4 +4,4 @@ angular.module('catchem', [
   'catchem.user',
   'catchem.services',
   'ui.router'
-]); // this will remain barebones; it only loads modules.
+]) // this will remain barebones; it only loads modules.
