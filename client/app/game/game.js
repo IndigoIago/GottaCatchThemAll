@@ -6,7 +6,19 @@ angular.module('catchem.game', ['catchem.services', 'catchem.profile'])// Load t
 .controller('GameCtrl', ['$scope', function ($scope) {
   $scope.aProfile = {
     name: 'Douglas Crockford',
-    photo: './img/douglas_c.png'
+    photo: './img/douglas_c.png',
+    questions: [
+      { q: 'Do I like JavaScript?',
+        a: true
+      },
+      { q: 'I like incrementing numbers with "++"',
+        a: false
+      }
+    ]
   };
+
+  $scope.$on('roundFinished', function (result) {
+    console.log(result);
+  });
 
 }]); 
