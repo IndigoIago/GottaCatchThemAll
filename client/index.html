@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html ng-app='catchem'>
   <head>
-    <meta charset="utf-8" />
     <title>catch'em</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
+    <style>
+      body {
+        background: #fcfcfc;
+      }
+    </style>
   </head>
   <body>
-    <div ng-view></div>
+
+    <div class="container"> <!-- app view container -->
+      <div ui-view class="row"></div> 
+    </div>
 
     <!-- load dependencies here -->
     <script src="lib/angular/angular.js"></script>

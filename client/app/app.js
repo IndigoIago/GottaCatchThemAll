@@ -14,8 +14,8 @@ angular.module('catchem', [
     })
     .state('play', {
       url: '/play',
-      templateUrl: 'game/game.html',
-      // controller: 'GameController'
+      templateUrl: 'app/game/game.html',
+      controller: 'GameCtrl'
     });
 
   $urlRouterProvider.otherwise('/login');
