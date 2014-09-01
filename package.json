@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/IndigoIago/GottaCatchThemAll",
   "dependencies": {
+    "body-parser": "^1.6.6",
     "express": "^4.8.6",
     "grunt": "^0.4.5",
     "jsdoc": "^3.3.0-alpha9",
