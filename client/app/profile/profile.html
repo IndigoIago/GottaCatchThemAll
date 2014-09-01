@@ -1,14 +1,29 @@
 <div class="profile-card">
   <div class="header">
-      <div class="col-xs-2"> <span class="name">{{data.name}}</span></div>  
-      <div class="col-xs-10"> <span class="point-value">1200</span></div>  
-    
+      <div class="col-xs-6 name"> <span>{{data.name}}</span></div>  
+      <div class="col-xs-6 point-value"> <span class="point-value">1200</span></div>  
   </div>
+
   <div class="photo">
     <img src="{{data.photo}}" alt="">
   </div>
+
   <div class="progress-wrapper">
     <div class="progress-bar progress-bar-success" style="width:70%"></div>
   </div>
-  <div class="question"></div>
+
+  <div class="question-wrapper col-xs-12">
+    <div class="row question">
+      <span> {{currentQuestion.q}} </span>
+    </div>
+    <div class="row answer">
+      <span class="yes" ng-click="submitAnswer(true)">
+        Yes
+      </span> or 
+      <span class="no" ng-click="submitAnswer(false)">
+        No
+      </span>
+    </div>
+  </div>
+  
 </div>

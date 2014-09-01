@@ -6,21 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
     <style>
+    /* general */
       body {
         background: #fcfcfc;
       }
+
+      /* profiles */
       .profile-card .header {
         height:35px;
         width: 100%;
         color: #fcfcfc;
         font-size: 16px;
         line-height: 2em;
-        background: rgba(0,0,0,0.75);
+        background: rgba(0,0,0,0.65);
         position: fixed;
         z-index: 2000;
       }
-      .profile-card .name {
+      .profile-card .name span {
         margin: 10px;
+      }
+      .profile-card .point-value {
+        text-align: right;
       }
       .profile-card .photo {
         top: -30px;
@@ -28,6 +34,7 @@
       }
       .profile-card .photo img {
         width: 100%;
+        margin-top: -20px;
       }
       .profile-card .progress-wrapper {
         height: 20px;
@@ -35,6 +42,34 @@
         width: 100%;
         display: block;
 
+      }
+      .profile-card .question-wrapper {
+        text-align: center;
+        font-size: 1.4em;
+        margin: 2em 0;
+      }
+      .question-wrapper .question {
+        font-weight: bold;
+        margin: 1em 0;
+        font-size: 1.3em;
+      }
+      .question-wrapper .answer {
+        margin: 2em 0;
+      }
+      .answer span {
+        font-weight: bold;
+      }
+      .answer .yes {
+        color: green
+      }
+      .answer .no {
+        color: red
+      }
+      .yes, .no {
+        padding: 0 1em;
+      }
+      .yes:hover,
+      .no:hover {
       }
 
     </style>
