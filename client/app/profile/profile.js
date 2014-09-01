@@ -3,7 +3,11 @@ angular.module('catchem.profile', ['catchem.services']) // Load the service modu
 .directive('profile', [function () {
   return {
     restrict: 'E',
-    templateUrl: 'profile.html',
+    scope: {
+      data: '='
+    },
+    templateUrl: 'app/profile/profile.html',
+    replace: true,
     link: function (scope, iElement, iAttrs) {
       
     }
