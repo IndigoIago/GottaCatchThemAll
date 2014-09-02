@@ -20,7 +20,7 @@ angular.module('catchem.game', ['catchem.services', 'game.profile'])// Load the 
   };
 
   $scope.roundHandler = function (winner) {
-    return wignner ? console.log('You won!') : console.log('You lost :(');
+    return winner ? console.log('You won!') : console.log('You lost :(');
   };
 
 }]); 
