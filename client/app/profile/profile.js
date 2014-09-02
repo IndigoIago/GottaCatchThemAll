@@ -63,11 +63,13 @@ angular.module('catchem.profile', ['catchem.services']) // Load the service modu
           var progressPercent;
 
           if ( isCorrect ) {
-            nextQuestion = questionHandler(scope.data.questions.splice(1));
+            scope.data.questions = scope.data.questions.splice(1);
+            nextQuestion = questionHandler(scope.data.questions);
             progressPercent = ((questionCount - scope.data.questions.length) / questionCount) * 100 + '%';
-            console.log(questionCount, scope.data.questions.length);
+
             incrementProgressBar(progressEl, progressPercent);
           } else {
+            // notify game controller of round result
             scope.roundHandler({ winner: false });
           }
 
