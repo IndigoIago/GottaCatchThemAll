@@ -3,7 +3,7 @@
 //TODO: Determine if game logic goes here
 
 
-angular.module('catchem.game', ['catchem.services', 'catchem.profile'])// Load the service module as a dependancy
+angular.module('catchem.game', ['catchem.services', 'game.profile'])// Load the service module as a dependancy
 .controller('GameCtrl', ['$scope', function ($scope) {
   $scope.aProfile = {
     name: 'Douglas Crockford',
@@ -20,7 +20,7 @@ angular.module('catchem.game', ['catchem.services', 'catchem.profile'])// Load t
   };
 
   $scope.roundHandler = function (winner) {
-    return winner ? console.log('You won!') : console.log('You lost :(');
+    return wignner ? console.log('You won!') : console.log('You lost :(');
   };
 
 }]); 

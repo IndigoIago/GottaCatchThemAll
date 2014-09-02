@@ -1,5 +1,5 @@
 // Contains profile module with profile directive and controller logic
-angular.module('catchem.profile', ['catchem.services']) // Load the service module as a dependancy
+angular.module('game.profile', []) // Load the service module as a dependancy
 .directive('profile', ['$timeout', function ($timeout) {
   // return the first question in the list
   var questionHandler = function (questions) {
@@ -48,7 +48,7 @@ angular.module('catchem.profile', ['catchem.services']) // Load the service modu
       data: '=',
       roundHandler: '&'
     },
-    templateUrl: 'app/profile/profile.html',
+    templateUrl: 'app/game/profile/profile.html',
     replace: true,
     link: function (scope, element, attrs) {
       var questionCount = scope.data.questions.length;
