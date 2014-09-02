@@ -1,6 +1,6 @@
-// Collection module
+// People module - contains People directive for listing collected people
 angular.module('collection.people', ['people.person'])
-.directive('person', [function () {
+.directive('people', [function () {
   return {
     restrict: 'E',
     link: function (scope, element, attrs) {
