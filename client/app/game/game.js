@@ -2,15 +2,24 @@
 
 //TODO: Determine if game logic goes here
 
-angular.module('catchem.game', ['catchem.services']); // Load the service module as a dependancy
-.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
-  $stateProvider
-    .state('play', {
-      url: '/play',
-      // templateUrl: 'app/game/game.html',
-      // controller: 'GameController'
-    });
 
-  $urlRouterProvider.otherwise('/signin');
+angular.module('catchem.game', ['catchem.services', 'catchem.profile'])// Load the service module as a dependancy
+.controller('GameCtrl', ['$scope', function ($scope) {
+  $scope.aProfile = {
+    name: 'Douglas Crockford',
+    photo: './img/douglas_c.png',
+    questions: [
+      { q: 'Do I like JavaScript?',
+        a: true
+      },
+      { q: 'I like incrementing numbers with "++"',
+        a: false
+      }
+    ]
+  };
 
-});
+  $scope.roundHandler = function () {
+    console.log('something');
+  };
+
+}]); 

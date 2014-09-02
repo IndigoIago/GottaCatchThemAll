@@ -1,21 +1,97 @@
 <!DOCTYPE html>
 <html ng-app='catchem'>
   <head>
-    <meta charset="utf-8" />
     <title>catch'em</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
+    <style>
+    /* general */
+      body {
+        background: #fcfcfc;
+      }
+
+      /* profiles */
+      .profile-card .header {
+        height:35px;
+        width: 100%;
+        color: #fcfcfc;
+        font-size: 16px;
+        line-height: 2em;
+        background: rgba(0,0,0,0.65);
+        position: fixed;
+        z-index: 2000;
+      }
+      .profile-card .name span {
+        margin: 10px;
+      }
+      .profile-card .point-value {
+        text-align: right;
+      }
+      .profile-card .name {
+        margin: 10px;
+      }
+      .profile-card .photo {
+        top: -30px;
+        width: 100%;
+      }
+      .profile-card .photo img {
+        width: 100%;
+        margin-top: -20px;
+      }
+      .profile-card .progress-wrapper {
+        height: 20px;
+        background: #333;
+        width: 100%;
+        display: block;
+
+      }
+      .profile-card .question-wrapper {
+        text-align: center;
+        font-size: 1.4em;
+        margin: 2em 0;
+      }
+      .question-wrapper .question {
+        font-weight: bold;
+        margin: 1em 0;
+        font-size: 1.3em;
+      }
+      .question-wrapper .answer {
+        margin: 2em 0;
+      }
+      .answer span {
+        font-weight: bold;
+      }
+      .answer .yes {
+        color: green
+      }
+      .answer .no {
+        color: red
+      }
+      .yes, .no {
+        padding: 0 1em;
+      }
+      .yes:hover,
+      .no:hover {
+      }
+
+    </style>
   </head>
   <body>
-    <div ng-view></div>
+
+    <div class="container"> <!-- app view container -->
+      <div ui-view class="row"></div> 
+    </div>
 
     <!-- load dependencies here -->
     <script src="lib/angular/angular.js"></script>
-    <script src="lib/angular-route/angular-route.js"></script>
+    <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
 
     <script src="app/auth/auth.js"></script>
+    <script src="app/profile/profile.js"></script>
     <script src="app/game/game.js"></script>
     <script src="app/user/user.js"></script>
     <script src="app/services/services.js"></script>
-    <script src="app.js"></script>
+    <script src="app/app.js"></script>
   </body>
 </html>
