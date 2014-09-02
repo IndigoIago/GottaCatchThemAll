@@ -1,11 +1,11 @@
 // Contains profile module with profile directive and controller logic
 angular.module('catchem.profile', ['catchem.services']) // Load the service module as a dependancy
 .directive('profile', ['$timeout', function ($timeout) {
-
+  // return the first question in the list
   var questionHandler = function (questions) {
     return questions[0];
   };
-
+  // simple animation for correct/incorrect answer
   var playRoundAnimation = function (isWinner, questionEl) {
     var bgColor;
     var indicatorImg;
@@ -23,18 +23,20 @@ angular.module('catchem.profile', ['catchem.services']) // Load the service modu
       'opacity': '0.5'
     });
 
+    // fade out the background shortly after it's applied (200ms)
     setTimeout( function () {
       questionEl.css({
-        'transition': 'all 1s',
+        'transition': 'all .65s',
         'background': 'transparent',
         'opacity': '1'
       });
     }, 200);
 
-    return $timeout(angular.noop, 1100); // 1.1 second delay
+    // return a $timeout promise to delay the next question from appearing
+    return $timeout(angular.noop, 650); // 
   };
 
-  var incrementProgressBar = function (element, percentage) {
+  var increaseProgressBar = function (element, percentage) {
     element.css({
       width: percentage
     });
@@ -67,7 +69,7 @@ angular.module('catchem.profile', ['catchem.services']) // Load the service modu
             nextQuestion = questionHandler(scope.data.questions);
             progressPercent = ((questionCount - scope.data.questions.length) / questionCount) * 100 + '%';
 
-            incrementProgressBar(progressEl, progressPercent);
+            increaseProgressBar(progressEl, progressPercent);
           } else {
             // notify game controller of round result
             scope.roundHandler({ winner: false });
