@@ -9,8 +9,8 @@ angular.module('catchem', [
   $stateProvider
     .state('login', {
       url: '/login',
-      // templateUrl: 'auth/login.html',
-      // controller: 'AuthController'
+      templateUrl: 'app/auth/login.html',
+      controller: 'AuthController'
     })
     .state('play', {
       url: '/play',
