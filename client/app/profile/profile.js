@@ -12,10 +12,10 @@ angular.module('catchem.profile', ['catchem.services']) // Load the service modu
 
     if ( isWinner ) {
       bgColor = '#d6e9c6';
-      indicatorImg = '../img/winner.svg';
+      indicatorImg = '';
     } else {
       bgColor = '#ebccd1';
-      indicatorImg = '../img/looser.svg';
+      indicatorImg = '';
     }
 
     questionEl.css({
@@ -25,13 +25,19 @@ angular.module('catchem.profile', ['catchem.services']) // Load the service modu
 
     setTimeout( function () {
       questionEl.css({
-        'transition': 'all 1.6s',
+        'transition': 'all 1s',
         'background': 'transparent',
         'opacity': '1'
       });
     }, 200);
 
-    return $timeout(angular.noop, 1600); // 1.6 second delay
+    return $timeout(angular.noop, 1100); // 1.1 second delay
+  };
+
+  var incrementProgressBar = function (element, percentage) {
+    element.css({
+      width: percentage
+    });
   };
 
   return {
@@ -43,19 +49,35 @@ angular.module('catchem.profile', ['catchem.services']) // Load the service modu
     templateUrl: 'app/profile/profile.html',
     replace: true,
     link: function (scope, element, attrs) {
+      var questionCount = scope.data.questions.length;
       var questionEl = angular.element(element.children()[3]); // fourth child of containing element = question wrapper (see template)
+      var progressEl = angular.element(element.children()[2].children[0]); // third child of containing element, then the first child 
 
       scope.currentQuestion = questionHandler(scope.data.questions);
 
       scope.submitAnswer = function (answer) {        
-        var isWinner = (answer === scope.currentQuestion.answer);
+        var isCorrect = (answer === scope.currentQuestion.answer);
 
-        // notify game controller of round result
-        scope.roundHandler({ winner: isWinner });
+        playRoundAnimation(isCorrect, questionEl).then( function () {
+          var nextQuestion;
+          var progressPercent;
 
-        playRoundAnimation(isWinner, questionEl).then( function () {
-          // set next question
-          scope.currentQuestion = questionHandler(scope.data.questions.splice(1));          
+          if ( isCorrect ) {
+            nextQuestion = questionHandler(scope.data.questions.splice(1));
+            progressPercent = ((questionCount - scope.data.questions.length) / questionCount) * 100 + '%';
+            console.log(questionCount, scope.data.questions.length);
+            incrementProgressBar(progressEl, progressPercent);
+          } else {
+            scope.roundHandler({ winner: false });
+          }
+
+          if ( nextQuestion ) {
+            scope.currentQuestion = nextQuestion;
+          } else {
+            // notify game controller of round result
+            scope.roundHandler({ winner: true });
+          }
+
         });
       };
     }
