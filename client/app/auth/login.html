@@ -1,15 +1,26 @@
 <div>
   <h2>Catch'em</h2>
-  <form>
-    <div>
-      <input type="text" placeholder="Username" />
-    </div>
-    <div>
-      <input type="text" placeholder="Password" />
-    </div>
-    <div>
-      <button>Log In</button>
-      <button>Register</button>
-    </div>
-  </form>
+
+  <!--
+    Below we include the Login Button social plugin. This button uses
+    the JavaScript SDK to present a graphical Login button that triggers
+    the FB.login() function when clicked.
+  -->
+  <fb:login-button size="xlarge" scope="public_profile,email,user_friends" onlogin="checkLoginState();" auto_logout_link="true"></fb:login-button>
+
+  <div>
+    Hello, {{user}}!
+  </div>
 </div>
+
+<script type="text/javascript">
+  // Facebook JavaScript SDK
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "http://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
