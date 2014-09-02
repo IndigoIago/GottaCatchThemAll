@@ -4,7 +4,8 @@ angular.module('catchem.profile', ['catchem.services']) // Load the service modu
   return {
     restrict: 'E',
     scope: {
-      data: '='
+      data: '=',
+      roundHandler: '&'
     },
     templateUrl: 'app/profile/profile.html',
     replace: true,
@@ -13,12 +14,9 @@ angular.module('catchem.profile', ['catchem.services']) // Load the service modu
 
       scope.submitAnswer = function (answer) {
         var result = answer === scope.currentQuestion.a;
-        
-        // scope.$emit('roundFinshed', result);
 
-        // var remainingQuestions = scope.data.questions.splice(1);
-        // if ( remainingQuestions.length )
-        //   play(remainingQuestions);
+        scope.roundHandler(result);
+        // next round stuff goes here
       };
     }
   };
