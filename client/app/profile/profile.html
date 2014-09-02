@@ -1,7 +1,7 @@
 <div class="profile-card">
   <div class="header">
       <div class="col-xs-6 name"> <span>{{data.name}}</span></div>  
-      <div class="col-xs-6 point-value"> <span class="point-value">1200</span></div>  
+      <div class="col-xs-6 point-value"> <span>{{data.pointValue}}</span></div>  
   </div>
 
   <div class="photo">
@@ -14,7 +14,7 @@
 
   <div class="question-wrapper col-xs-12">
     <div class="row question">
-      <span> {{currentQuestion.q}} </span>
+      <span> {{currentQuestion.question}} </span>
     </div>
     <div class="row answer">
       <span class="yes" ng-click="submitAnswer(true)">

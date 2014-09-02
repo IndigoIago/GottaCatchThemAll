@@ -9,17 +9,18 @@ angular.module('catchem.game', ['catchem.services', 'catchem.profile'])// Load t
     name: 'Douglas Crockford',
     photo: './img/douglas_c.png',
     questions: [
-      { q: 'Do I like JavaScript?',
-        a: true
+      { question: 'Do I like JavaScript?',
+        answer: true
       },
-      { q: 'I like incrementing numbers with "++"',
-        a: false
+      { question: 'I like incrementing numbers with "++"',
+        answer: false
       }
-    ]
+    ],
+    pointValue: 1400
   };
 
-  $scope.roundHandler = function () {
-    console.log('something');
+  $scope.roundHandler = function (winner) {
+    return winner ? console.log('You won!') : console.log('You lost :(');
   };
 
 }]); 
