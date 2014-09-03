@@ -3,12 +3,16 @@
  * Implemented with Express - http://expressjs.com/4x/api.html
  * Run with nodemon by running 'nodemon server.js' from this folder.
  ****************/
+var router = require('./router'); // access router.js file
+
 var express = require('express');
-var app = express();
-var router = require('./router');
 var bodyParser = require('body-parser'); // to get data from POST: https://github.com/expressjs/body-parser
 
-var localPort = process.env.PORT || 3003; // hard-coded port
+var app = express();
+
+host = 'localhost';
+localPort = process.env.PORT || 3003; // hard-coded port.   NOTE: MAY ALSO need ' || Connection.DEFAULT_PORT ' for deploy
+
 
 /*****************
  * Headers
@@ -18,6 +22,7 @@ app.all('*', function(req, res, next) { // headers for server
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   next();
 });
+
 
 /*****************
  * NOTE: This code block included for review. I recommend we review it before
@@ -38,11 +43,14 @@ app.all('*', function(req, res, next) { // headers for server
 /*****************
  * Routes
  ****************/
-app.get('/', router.index); // call router.index on get '/'
+app.get('/', router.index); // call router.index on GET '/'
+app.get('/db', router.getDB); // return mongoClient DB info
+app.get('/profiles', router.getProfiles); // return DB profiles
+app.get('/save', router.saveUser); // TODO: SHOULD BE POST
 
 
 /*****************
  * Start Server
  ****************/
-app.listen(localPort); // Start the serverconsole.log('Magic happens on port ' + port);
+app.listen(localPort); // Start the server
 console.log('Listening on port ' + localPort); // Log to console on successful start
