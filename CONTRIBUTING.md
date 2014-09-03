@@ -9,7 +9,9 @@
   - test/...
   - doc/...
   - refactor/...
-  ex: git checkout -b bug/0day 
+```sh
+git checkout -b bug/0day 
+```
 3. Make commits to your feature branch. Prefix each commit like so:
   - (feat) Added a new feature
   - (fix) Fixed inconsistent tests [Fixes #0]
@@ -17,11 +19,17 @@
   - (cleanup) ...
   - (test) ...
   - (doc) ...
-  ex: git commit -m "(bug) now we are safe from hackers"
+```sh
+git commit -m "(bug) now we are safe from hackers"
+```
 4. When you've finished with your fix or feature, Rebase upstream changes into your branch
-ex: git pull --rebase upstream master
+```sh
+git pull --rebase upstream master
+```
 5. Push to your fork
-ex: git push origin bug/0day
+```sh
+git push origin bug/0day
+```
 5. Check if there arent any major change that will conflict with yours on the waitting pull requests. If there is, check if you can accept it.
 6.submit a [pull request][] directly to master from your branch. Include a description of your changes.
 7. Your pull request will be reviewed by another maintainer. The point of code
