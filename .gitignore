@@ -1,4 +1,4 @@
 *.DS_Store
 client/lib
-
+node_modules
 .sass-cache
