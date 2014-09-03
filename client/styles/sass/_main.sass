@@ -1,0 +1,57 @@
+body
+  background: #fcfcfc
+  overflow: hidden
+
+// profiles
+
+.profile-card
+  .header
+    height: 35px
+    width: 100%
+    color: #fcfcfc
+    font-size: 16px
+    line-height: 2em
+    background: rgba(0, 0, 0, 0.65)
+    position: fixed
+    z-index: 2000
+  .name span
+    margin: 10px
+  .point-value
+    text-align: right
+  .photo
+    top: -30px
+    width: 100%
+    img
+      width: 100%
+      margin-top: -20px
+  .progress-wrapper
+    height: 20px
+    background: #333
+    width: 100%
+    display: block
+  .question-wrapper
+    text-align: center
+    font-size: 1.4em
+    padding: 2em 0
+    height: 999px //nasty hack to get the container to span full-height
+
+.question-wrapper
+  .question
+    font-weight: bold
+    margin: 1em 0
+    font-size: 1.3em
+  .answer
+    margin: 2em 0
+
+.answer
+  span
+    font-weight: bold
+  .yes
+    color: green
+  .no
+    color: red
+
+.yes, .no
+  padding: 0 1em
+
+.yes:hover!, .no:hover!

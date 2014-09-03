@@ -28,6 +28,11 @@ Meet interesting new people, capture them, and enjoy the social web you deserve.
 
 
 ## Development
+To develop using sass, go on the client folder, and on your terminal do
+```sh
+compass watch
+```
+Should be integrated on grunt task soon
 
 ### Installing Dependencies
 
@@ -37,6 +42,12 @@ From within the root directory:
 sudo npm install -g bower
 npm install
 bower install
+```
+
+if you want to change the css's, install compass first.
+
+```sh
+gem install compass --pre
 ```
 
 ### Roadmap
