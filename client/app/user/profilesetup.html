@@ -1,0 +1,12 @@
+<div class="profile-setup" data="aProfile" ng-controller="UserController">
+<form>
+  <h2>About Me:</h2>
+  <textarea>{{ aProfile.about }}</textarea>
+  <div><button>Update</button></div>
+  <h2>My Questions:</h2>
+  <ul>
+    <li ng-repeat="question in aProfile.questions"><a href="#">{{ question.question }}</a></li>
+  </ul>
+  <a href="#">Add a new question</a>
+</form>
+</div>

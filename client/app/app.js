@@ -13,6 +13,11 @@ angular.module('catchem', [
       templateUrl: 'app/auth/login.html',
       controller: 'AuthController'
     })
+    .state('usersetup', {
+      url: '/usersetup',
+      templateUrl: 'app/user/profilesetup.html',
+      controller: 'UserController'
+    })
     .state('play', {
       url: '/play',
       templateUrl: 'app/game/game.html',
