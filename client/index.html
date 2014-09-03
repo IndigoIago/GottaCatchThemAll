@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
     <style>
-    /* general */
+      /* general */
       body {
         background: #fcfcfc;
         overflow: hidden;
@@ -95,5 +95,17 @@
     <script src="app/user/user.js"></script>
     <script src="app/services/services.js"></script>
     <script src="app/app.js"></script>
+
+    <script type="text/javascript">
+      // Facebook JavaScript SDK
+      // Load the SDK asynchronously
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "http://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
   </body>
 </html>
