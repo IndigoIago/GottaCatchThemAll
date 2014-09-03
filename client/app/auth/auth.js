@@ -12,7 +12,7 @@ angular.module('catchem.auth', ['catchem.services'])
     user: user
   }
 })
-.controller('AuthController', function(AuthFactory, $scope, $window, $state) {
+.controller('AuthController', function(AuthFactory, $scope, $window, $state, $http) {
   $scope.user = AuthFactory.user;
 
   $scope.FBlogout = function() {
@@ -82,9 +82,9 @@ angular.module('catchem.auth', ['catchem.services'])
   // Here we run a very simple test of the Graph API after login is
   // successful.  See statusChangeCallback() for when this call is made.
   var testAPI = function() {
-    console.log('Welcome!  Fetching your information.... ');
+    // console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
-      console.log('Response data: ', response);
+      // console.log('Response data: ', response);
       AuthFactory.user.name = response.name;
       AuthFactory.user.id = response.id;
       AuthFactory.user.loggedIn = true;
@@ -92,6 +92,28 @@ angular.module('catchem.auth', ['catchem.services'])
       if (response.email) {
         AuthFactory.user.email = response.email;
       }
+
+      $http({
+        url: 'http://localhost:3003/login',
+        method: "POST",
+        data: AuthFactory.user
+      })
+      .then(function(response) {
+        // Success
+        console.log(response.data);
+      }, 
+      function(response) { // optional
+        // Error
+      });
+
+      // // POST data to server
+      // $http.post('http://localhost:3003/login', JSON.stringify(AuthFactory.user))
+      // .success(function(){
+      //   console.log("Successfully posted data:", JSON.stringify(AuthFactory.user));
+      // })
+      // .error(function(){
+      //   console.log('error posting');
+      // });
 
       // Without this, the $scope doesn't update in the view
       $scope.$apply();

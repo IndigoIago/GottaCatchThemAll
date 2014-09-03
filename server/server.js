@@ -15,7 +15,8 @@ var localPort = process.env.PORT || 3003; // hard-coded port
  ****************/
 app.all('*', function(req, res, next) { // headers for server
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  // res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
 
@@ -33,12 +34,13 @@ app.all('*', function(req, res, next) { // headers for server
        app.use(bodyParser.urlencoded({ extended: true }));
        app.use(bodyParser.json()) 
  ****************/
-
+app.use(bodyParser.json());
 
 /*****************
  * Routes
  ****************/
 app.get('/', router.index); // call router.index on get '/'
+app.post('/login', router.login); // call router.index on get '/'
 
 
 /*****************

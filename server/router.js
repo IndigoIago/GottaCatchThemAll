@@ -10,3 +10,9 @@ exports.index = function(req, res){
   console.log(defaultMessage + 'GET');
   res.json({ message: defaultMessage + 'GET' }); // NOTE: alt syntax ==> res.end(defaultMessage + 'GET');
 }; // end index
+
+exports.login = function(req, res){
+  console.log(defaultMessage + 'POST Login');
+  console.log('req:', req.body);
+  res.end('got your data: ' + JSON.stringify(req.body));
+};
