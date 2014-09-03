@@ -14,5 +14,19 @@ exports.index = function(req, res){
 exports.login = function(req, res){
   console.log(defaultMessage + 'POST Login');
   console.log('req:', req.body);
+
+  /*
+  Received from client:
+  
+  user = {
+    fullname: full name,
+    firstname: first name,
+    lastname: last name,
+    id: Facebook ID,
+    email: email address,
+    gender: gender
+  }
+  */
+
   res.end('got your data: ' + JSON.stringify(req.body));
 };

@@ -84,14 +84,30 @@ angular.module('catchem.auth', ['catchem.services'])
   var testAPI = function() {
     // console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
-      // console.log('Response data: ', response);
-      AuthFactory.user.name = response.name;
+      console.log('Response data: ', response);
+      AuthFactory.user.fullname = response.name;
+      AuthFactory.user.firstname = response.first_name;
+      AuthFactory.user.lastname = response.last_name;
       AuthFactory.user.id = response.id;
+      AuthFactory.user.gender = response.gender;
       AuthFactory.user.loggedIn = true;
       
       if (response.email) {
         AuthFactory.user.email = response.email;
       }
+
+      /*
+      Send to server:
+
+      user = {
+        fullname: full name,
+        firstname: first name,
+        lastname: last name,
+        id: Facebook ID,
+        email: email address,
+        gender: gender
+      }
+      */
 
       $http({
         url: 'http://localhost:3003/login',
@@ -105,15 +121,6 @@ angular.module('catchem.auth', ['catchem.services'])
       function(response) { // optional
         // Error
       });
-
-      // // POST data to server
-      // $http.post('http://localhost:3003/login', JSON.stringify(AuthFactory.user))
-      // .success(function(){
-      //   console.log("Successfully posted data:", JSON.stringify(AuthFactory.user));
-      // })
-      // .error(function(){
-      //   console.log('error posting');
-      // });
 
       // Without this, the $scope doesn't update in the view
       $scope.$apply();
