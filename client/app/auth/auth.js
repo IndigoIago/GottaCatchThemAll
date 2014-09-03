@@ -122,15 +122,6 @@ angular.module('catchem.auth', ['catchem.services'])
         // Error
       });
 
-      // // POST data to server
-      // $http.post('http://localhost:3003/login', JSON.stringify(AuthFactory.user))
-      // .success(function(){
-      //   console.log("Successfully posted data:", JSON.stringify(AuthFactory.user));
-      // })
-      // .error(function(){
-      //   console.log('error posting');
-      // });
-
       // Without this, the $scope doesn't update in the view
       $scope.$apply();
     });
