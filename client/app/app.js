@@ -2,6 +2,7 @@ angular.module('catchem', [
   'catchem.auth',
   'catchem.game',
   'catchem.user',
+  'catchem.collection',
   'catchem.services',
   'ui.router'
 ]) // this will remain barebones; it only loads modules.
@@ -16,6 +17,11 @@ angular.module('catchem', [
       url: '/play',
       templateUrl: 'app/game/game.html',
       controller: 'GameCtrl'
+    })
+    .state('collection', {
+      url: '/collection',
+      templateUrl: 'app/collection/collection.html',
+      controller: 'CollectionCtrl'
     });
 
   $urlRouterProvider.otherwise('/login');
