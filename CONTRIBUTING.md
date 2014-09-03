@@ -3,28 +3,34 @@
 ## General Workflow
 
 1. Fork the repo
-1. Cut a namespaced feature branch from master
+2. Cut a namespaced feature branch from master
   - bug/...
   - feat/...
   - test/...
   - doc/...
   - refactor/...
-1. Make commits to your feature branch. Prefix each commit like so:
+  ex: git checkout -b bug/0day 
+3. Make commits to your feature branch. Prefix each commit like so:
   - (feat) Added a new feature
   - (fix) Fixed inconsistent tests [Fixes #0]
   - (refactor) ...
   - (cleanup) ...
   - (test) ...
   - (doc) ...
-1. When you've finished with your fix or feature, Rebase upstream changes into your branch. submit a [pull request][]
-   directly to master. Include a description of your changes.
-1. Your pull request will be reviewed by another maintainer. The point of code
+  ex: git commit -m "(bug) now we are safe from hackers"
+4. When you've finished with your fix or feature, Rebase upstream changes into your branch
+ex: git pull --rebase upstream master
+5. Push to your fork
+ex: git push origin bug/0day
+5. Check if there arent any major change that will conflict with yours on the waitting pull requests. If there is, check if you can accept it.
+6.submit a [pull request][] directly to master from your branch. Include a description of your changes.
+7. Your pull request will be reviewed by another maintainer. The point of code
    reviews is to help keep the codebase clean and of high quality and, equally
    as important, to help you grow as a programmer. If your code reviewer
    requests you make a change you don't understand, ask them why.
-1. Fix any issues raised by your code reviwer, and push your fixes as a single
+8. Fix any issues raised by your code reviwer, and push your fixes as a single
    new commit.
-1. Once the pull request has been reviewed, it will be merged by another member of the team. Do not merge your own commits.
+9. Once the pull request has been reviewed, it will be merged by another member of the team. Do not merge your own commits.
 
 ## Detailed Workflow
 
