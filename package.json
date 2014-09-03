@@ -22,6 +22,6 @@
     "grunt": "^0.4.5",
     "jsdoc": "^3.3.0-alpha9",
     "mongodb": "^1.4.9",
-    "nodemon": "^1.4.21"
+    "nodemon": "^1.2.1"
   }
 }
