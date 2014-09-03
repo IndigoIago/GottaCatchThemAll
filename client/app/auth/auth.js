@@ -100,7 +100,7 @@ angular.module('catchem.auth', ['catchem.services'])
       Send to server:
 
       user = {
-        name: full name,
+        fullname: full name,
         firstname: first name,
         lastname: last name,
         id: Facebook ID,

@@ -19,7 +19,7 @@ exports.login = function(req, res){
   Received from client:
   
   user = {
-    name: full name,
+    fullname: full name,
     firstname: first name,
     lastname: last name,
     id: Facebook ID,
