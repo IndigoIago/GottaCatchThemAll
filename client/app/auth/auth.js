@@ -2,8 +2,37 @@
 // Load the service module as a dependancy
 
 angular.module('catchem.auth', ['catchem.services'])
-.controller('AuthController', function($scope, $window, $state, Auth) {
-  $scope.user = {};
+.factory('AuthFactory', function() {
+  var user = {
+    name: "Guest",
+    loggedIn: false
+  };
+
+  return {
+    user: user
+  }
+})
+.controller('AuthController', function(AuthFactory, $scope, $window, $state) {
+  $scope.user = AuthFactory.user;
+
+  $scope.FBlogout = function() {
+    FB.logout(function(response) {
+      // Person is now logged out
+      AuthFactory.user.loggedIn = false;
+
+      // Without this, the $scope doesn't update in the view
+      $scope.$apply();
+
+      statusChangeCallback(response);
+    });
+  }
+
+  $scope.FBlogin = function() {
+    FB.login(function(response) {
+      // handle the response
+      statusChangeCallback(response);
+    }, {scope: 'public_profile, email, user_friends'});
+  }
 
   $window.fbAsyncInit = function() {
     FB.init({
@@ -33,8 +62,6 @@ angular.module('catchem.auth', ['catchem.services'])
   
   // This is called with the results from FB.getLoginStatus().
   var statusChangeCallback = function(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
     // The response object is returned with a status field that lets the
     // app know the current login status of the person.
     // Full docs on the response object can be found in the documentation
@@ -52,23 +79,22 @@ angular.module('catchem.auth', ['catchem.services'])
     }
   }
 
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
-  var checkLoginState = function() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
-
   // Here we run a very simple test of the Graph API after login is
   // successful.  See statusChangeCallback() for when this call is made.
   var testAPI = function() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
-      console.log('Successful login for: ' + response.name);
       console.log('Response data: ', response);
-      $scope.user = response.name;
+      AuthFactory.user.name = response.name;
+      AuthFactory.user.id = response.id;
+      AuthFactory.user.loggedIn = true;
+      
+      if (response.email) {
+        AuthFactory.user.email = response.email;
+      }
+
+      // Without this, the $scope doesn't update in the view
+      $scope.$apply();
     });
   }
 });

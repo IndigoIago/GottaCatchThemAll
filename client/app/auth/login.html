@@ -1,26 +1,27 @@
-<div>
+<div ng-controller="AuthController">
   <h2>Catch'em</h2>
+  
+  <!-- if user is logged in -->
+  <div ng-if="user.loggedIn">
+    <button ng-click="FBlogout()">Sign out</button>
 
-  <!--
-    Below we include the Login Button social plugin. This button uses
-    the JavaScript SDK to present a graphical Login button that triggers
-    the FB.login() function when clicked.
-  -->
-  <fb:login-button size="xlarge" scope="public_profile,email,user_friends" onlogin="checkLoginState();" auto_logout_link="true"></fb:login-button>
+    <div ng-if="user.name">
+      Hello, {{ user.name }}!
+    </div>
 
-  <div>
-    Hello, {{user}}!
+    <div ng-if="user.id">
+      You are id#: {{ user.id }}
+    </div>
+
+    <div ng-if="user.email">
+      Your email address is: {{ user.email }}
+    </div>
+  </div>
+
+  <!-- if user is not logged in -->
+  <div ng-if="!user.loggedIn">
+    <button ng-click="FBlogin()">Sign in with Facebook</button>
+
+    <div>Please log in</div>
   </div>
 </div>
-
-<script type="text/javascript">
-  // Facebook JavaScript SDK
-  // Load the SDK asynchronously
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "http://connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
