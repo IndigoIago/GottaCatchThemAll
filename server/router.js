@@ -1,41 +1,21 @@
-/*********************
- * Router for Express Server
- * HTTP verbs like 'GET', 'POST', etc. are defined here.
- * Implemented with Express - http://expressjs.com/4x/api.html#router
- * 
- ********************/
-var express = require('express');
-var app = express(); // the Express instance
-
-var bodyParser = require('body-parser'); // to get data from POST:
-
-var defaultMessage = 'NOTE: Inside route.';
-// var utils = require('./utils'); // all in one file for now...
-
-
-///////////////////////////////////////////
-///////////////////////////////////////////
-/////////       START MONGO      //////////
-///////////////////////////////////////////
-///////////////////////////////////////////
-///////////////////////////////////////////
 
 /*****************
- * MongoDB Database
- * Implemented with Monk - https://github.com/LearnBoost/monk
- * Run with nodemon by running 'nodemon server.js' from this folder.
+ * TEMPORARY sample users using Facebook formatting:
  ****************/
-// var app = require('./server');
 
-var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk('localhost:27017/catchem'); // TODO: update host and database name
+//   Received from client:
+  
+//   user = {
+//     fullname: full name,
+//     firstname: first name,
+//     lastname: last name,
+//     id: Facebook ID,
+//     email: email address,
+//     gender: gender
+//   }
 
-/*****************
- * TEMPORARY sample user
- ****************/
-var sampleUser = {
-  fullname: 'sampleUser',
+var user1 = {
+  fullname: 'full name',
   firstname: 'first name',
   lastname: 'last name',
   id: 123456,
@@ -47,7 +27,7 @@ var user2 = {
   fullname: 'user2',
   firstname: 'first name',
   lastname: 'last name',
-  id: 123456,
+  id: 234567,
   email: 'email address',
   gender: 'gender'
 };
@@ -56,7 +36,7 @@ var user3 = {
   fullname: 'user3',
   firstname: 'first name',
   lastname: 'last name',
-  id: 123456,
+  id: 345678,
   email: 'email address',
   gender: 'gender'
 };
@@ -65,31 +45,29 @@ var user4 = {
   fullname: 'user4',
   firstname: 'first name',
   lastname: 'last name',
-  id: 123456,
+  id: 456789,
   email: 'email address',
   gender: 'gender'
 };
 
 
 
-var users = db.get('users');
 
-users.index('name last'); // get users collection ==> users.insert(), users.update(), etc.
-users.insert({ name: 'Tobi', bigdata: {} });
-  users.find({ name: 'Loki' }, '-bigdata', function () {
-  // exclude bigdata field
-});
+/*********************
+ * Router for Express Server
+ * HTTP verbs like 'GET', 'POST', etc. are defined here.
+ * Implemented with Express - http://expressjs.com/4x/api.html#router
+ * 
+ ********************/
+var express = require('express');
+var app = express(); // the Express instance
+var bodyParser = require('body-parser'); // to get data from POST:
 
-// db.close();
+var db = require('./utils'); // NOTE: might be require('/../data')
 
+var defaultMessage = 'NOTE: Inside route.';
+// var utils = require('./utils'); // all in one file for now...
 
-///////////////////////////////////////////
-///////////////////////////////////////////
-///////////////////////////////////////////
-/////////       END MONGO        //////////
-///////////////////////////////////////////
-///////////////////////////////////////////
-///////////////////////////////////////////
 
 /*****************
  * Headers
@@ -114,82 +92,90 @@ app.use(express.static(__dirname + '/../client')); // serve static content from 
 /*****************
  * Routes
  ****************/
-// app.get('/', router.index); // call router.index on get '/'
-// app.post('/login', router.login); // call router.index on get '/'
-
 app.get('/',function(req,res){
-  db.driver.admin.listDatabases(function(e,dbs){
-      res.json(dbs);
-  });
+  // should be handled by express.static(__dirname...)
 });
+
+app.get('/listDBs',function(req,res){
+  db.driver.admin.listDatabases(function(e,dbs){
+    res.json(dbs);
+  });
+}); // end get(listDBs)
 
 app.get('/collections',function(req,res){
   db.driver.collectionNames(function(e,names){
     res.json(names);
   })
-});
+}); // end get(collections)
 
-app.get('/collections/:name',function(req,res){
-  var collection = db.get(req.params.name);
+
+/*****************
+ * Test query
+ * Anything passed in past 'query/' will be queried as a collection
+ * i.e.: 'profiles', 'San Francisco', etc.
+ * try going to 'http://localhost:3003/query/profiles'
+ ****************/
+app.get('/query/:dbCollectionToQuery',function(req,res){
+  var dbCollectionToQuery = req.params.dbCollectionToQuery;
+  var collection = db.get(dbCollectionToQuery);
   collection.find({},{limit:20},function(e,docs){
     res.json(docs);
-  })
-});
+  }); // end find()
+}); // end get(query)
 
-app.get('/profiles',function(req,res){
+
+/*****************
+ * Test POST
+ * NOTE: This is NOT RESTful, and does not use POST.
+ * TODO: refactor to use REST & POST requests.
+ * Anything passed in past 'saveUser/' will be saved in the 'profiles' collection
+ * i.e.: 'user2', 'user4', etc.
+ * try going to 'http://localhost:3003/saveUser/user1'
+ ****************/
+app.get('/saveUser/:userToSaveToDB',function(req,res){
+  var userToSaveToDB = req.params.dbCollectionToQuery;
+
+  if (userToSaveToDB === 'user1') {
+    userToSaveToDB = user1;
+  } else if (userToSaveToDB === 'user2') {
+    userToSaveToDB = user2;
+  } else if (userToSaveToDB === 'user3') {
+    userToSaveToDB = user3;
+  } else if (userToSaveToDB === 'user4') {
+    userToSaveToDB = user4;
+  } else {
+    userToSaveToDB = userToSaveToDB;
+  }
+
   var profiles = db.get('profiles');
-  profiles.find({},{limit:20},function(e,docs){
+  profiles.insert(userToSaveToDB, function (err, profile) {
+    if(err) throw err;
+    res.json(profile);
+  }); // end insert()
+}); // end get(saveUser)
+
+// app.get('usersetup', function (req, res, next) {
+//   var httpString = "At usersetup";
+//   res.json('Something here...');
+// }; // end app.get(usersetup)
+
+app.post('/login', function(req, res, next) {
+  var fullname = req.body.fullname;
+  var password = req.body.password;
+
+  var profiles = db.get('profiles');
+
+  // This returns the user.
+  // TODO: query for user, then authenticate, then token?
+  profiles.findOne({
+    fullname: fullname
+  }, function(e, docs){
     res.json(docs);
-  })
-});
-
-app.get('/sample',function(req,res) {
-  var profiles = db.get('profiles');
-  profiles.insert(sampleUser, function (err, profile) {
-    if(err) throw err;
-    res.json(profile);
-  }); // end insert()
-}); // end app.post
-
-app.post('/POSTsample/:user',function(req,res) {
-  var profiles = db.get('profiles');
-  var thisUser = db.get(req.params.user);
-  console.log('thisUser = ' + thisUser);
-  profiles.insert(thisUser, function (err, profile) {
-    if(err) throw err;
-    res.json(profile);
-  }); // end insert()
-}); // end app.post
-
-// exports.index = function(req, res){
-//   db.driver.admin.listDatabases(function(e,dbs) {
-//     res.json(dbs);
-//   }); // end listDatabases
-// }; // end index
-
-// exports.login = function(req, res){
-//   console.log(defaultMessage + 'POST Login');
-//   console.log('req:', req.body);
-
-
-
-
-//   Received from client:
-  
-//   user = {
-//     fullname: full name,
-//     firstname: first name,
-//     lastname: last name,
-//     id: Facebook ID,
-//     email: email address,
-//     gender: gender
-//   }
-  
+  }); // end findOne()
+}); // end app.post(login)
 
 //   res.end('got your data: ' + JSON.stringify(req.body));
 // };
 
-
-
-
 module.exports = app; // export app for router.js
+
