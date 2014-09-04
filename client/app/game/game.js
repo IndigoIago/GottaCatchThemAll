@@ -4,7 +4,7 @@
 
 
 angular.module('catchem.game', ['catchem.services', 'game.profile'])// Load the service module as a dependancy
-.controller('GameCtrl', ['$scope', function ($scope) {
+.controller('GameCtrl', ['$scope', 'Collection', function ($scope, Collection) {
   $scope.aProfile = {
     name: 'Douglas Crockford',
     photo: './img/douglas_c.png',
