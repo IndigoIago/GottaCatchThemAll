@@ -4,7 +4,7 @@
 
 
 angular.module('catchem.game', ['catchem.services', 'game.profile'])// Load the service module as a dependancy
-.controller('GameCtrl', ['$scope', function ($scope) {
+.controller('GameCtrl', ['$scope', 'Collection', function ($scope, Collection) {
   $scope.aProfile = {
     name: 'Douglas Crockford',
     photo: './img/douglas_c.png',
@@ -19,8 +19,13 @@ angular.module('catchem.game', ['catchem.services', 'game.profile'])// Load the 
     pointValue: 1400
   };
 
-  $scope.roundHandler = function (winner) {
-    return winner ? console.log('You won!') : console.log('You lost :(');
+  $scope.roundHandler = function (isWinner) {
+    // for debugging
+    isWinner ? console.log('You won!') : console.log('You lost :(');
+
+    if ( isWinner ) {
+      Collection.addProfile($scope.aProfile)
+    }
   };
 
 }]); 
