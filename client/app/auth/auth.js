@@ -2,7 +2,7 @@
 // Load the service module as a dependancy
 
 angular.module('catchem.auth', ['catchem.services'])
-.factory('AuthFactory', function($http) {
+.factory('AuthFactory', function($state, $http, $window) {
   var user = {
     loggedIn: false
   };
@@ -14,62 +14,31 @@ angular.module('catchem.auth', ['catchem.services'])
     });
   };
 
-  return {
-    user: user,
-    isAuth: isAuth
-  }
-})
-.controller('AuthController', function(AuthFactory, $scope, $window, $state, $http) {
-  $scope.user = AuthFactory.user;
-
-  $scope.FBlogout = function() {
+  var FBlogout = function() {
     FB.logout(function(response) {
       // Remove web token
       $window.localStorage.removeItem('com.catchemall');
 
       // Person is now logged out
-      AuthFactory.user.loggedIn = false;
+      user = {};
+      user.loggedIn = false;
 
       // Without this, the $scope doesn't update in the view
-      $scope.$apply();
+      // $scope.$apply();
 
-      statusChangeCallback(response);
+      $state.go('login');
+
+      // statusChangeCallback(response);
     });
-  }
+  };
 
-  $scope.FBlogin = function() {
+  var FBlogin = function() {
     FB.login(function(response) {
       // handle the response
       statusChangeCallback(response);
     }, {scope: 'public_profile, email, user_friends'});
   }
 
-  $window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '596181923827041',
-      cookie     : true,  // enable cookies to allow the server to access 
-                          // the session
-      xfbml      : true,  // parse social plugins on this page
-      version    : 'v2.1' // use version 2.1
-    });
-
-    // Now that we've initialized the JavaScript SDK, we call 
-    // FB.getLoginStatus().  This function gets the state of the
-    // person visiting this page and can return one of three states to
-    // the callback you provide.  They can be:
-    //
-    // 1. Logged into your app ('connected')
-    // 2. Logged into Facebook, but not your app ('not_authorized')
-    // 3. Not logged into Facebook and can't tell if they are logged into
-    //    your app or not.
-    //
-    // These three cases are handled in the callback function.
-
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  };
-  
   // This is called with the results from FB.getLoginStatus().
   var statusChangeCallback = function(response) {
     // The response object is returned with a status field that lets the
@@ -95,15 +64,15 @@ angular.module('catchem.auth', ['catchem.services'])
     // console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
       // console.log('Response data: ', response);
-      AuthFactory.user.full_name = response.name;
-      AuthFactory.user.first_name = response.first_name;
-      AuthFactory.user.last_name = response.last_name;
-      AuthFactory.user.facebook_id = response.id;
-      AuthFactory.user.gender = response.gender;
-      AuthFactory.user.loggedIn = true;
+      user.full_name = response.name;
+      user.first_name = response.first_name;
+      user.last_name = response.last_name;
+      user.facebook_id = response.id;
+      user.gender = response.gender;
+      user.loggedIn = true;
       
       if (response.email) {
-        AuthFactory.user.email = response.email;
+        user.email = response.email;
       }
 
       /*
@@ -121,20 +90,63 @@ angular.module('catchem.auth', ['catchem.services'])
 
       $http({
         url: '/login',
-        method: "POST",
-        data: AuthFactory.user
+        method: 'POST',
+        data: user
       })
       .then(function(response) {
         // Success
         // console.log("Got token: ", response.data.token);
+
+        // Set web token
         $window.localStorage.setItem('com.catchemall', response.data.token);
+
+        // Move user to the play screen
+        $state.go('play');
       }, 
       function(response) { // optional
         // Error
       });
-
-      // Without this, the $scope doesn't update in the view
-      $scope.$apply();
     });
   }
+
+  return {
+    user: user,
+    isAuth: isAuth,
+    FBlogin: FBlogin,
+    FBlogout: FBlogout,
+    statusChangeCallback: statusChangeCallback,
+    testAPI: testAPI,
+    // fbAsyncInit: fbAsyncInit
+  }
+})
+.controller('AuthController', function(AuthFactory, $scope, $window) {
+  $scope.user = AuthFactory.user;
+  $scope.FBlogout = AuthFactory.FBlogout;
+  $scope.FBlogin = AuthFactory.FBlogin;
+
+  $window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '596181923827041',
+      cookie     : true,  // enable cookies to allow the server to access 
+                          // the session
+      xfbml      : true,  // parse social plugins on this page
+      version    : 'v2.1' // use version 2.1
+    });
+
+    // Now that we've initialized the JavaScript SDK, we call 
+    // FB.getLoginStatus().  This function gets the state of the
+    // person visiting this page and can return one of three states to
+    // the callback you provide.  They can be:
+    //
+    // 1. Logged into your app ('connected')
+    // 2. Logged into Facebook, but not your app ('not_authorized')
+    // 3. Not logged into Facebook and can't tell if they are logged into
+    //    your app or not.
+    //
+    // These three cases are handled in the callback function.
+
+    FB.getLoginStatus(function(response) {
+      AuthFactory.statusChangeCallback(response);
+    });
+  };
 });
