@@ -4,39 +4,70 @@ angular.module('person.expander', [])
 .directive('expander', [function () {
   return {
     restrict: 'A',
+    scope: {},
     controller: function ($scope) {
       var ctrl = this;
       var expandable;
-      console.log('init')
+      var expander;
+      var expHeight;
+
       $scope.isExpanded = false;
 
 
-      $scope.expand = function () {
-        expandable.css({
-          height: 'auto',
-          'opacity': 1
+      ctrl.expand = function () {
+        // set expander height
+        expander.css({
+          height: expander[0].getBoundingClientRect().height + expHeight + 'px',
         });
+
+        // set expandable opacity
+        expandable.css({
+          opacity: 1,
+          'transition': 'opacity .25s .2s'
+        });
+
+        $scope.isExpanded = true;
       }
 
-      $scope.collapse = function () {
-        expandable.css({
-          height: 0
+      ctrl.collapse = function () {
+
+        expander.css({
+          height: expander[0].getBoundingClientRect().height - expHeight + 'px',
         });
+
+        expandable.css({
+          height: 0,
+          opacity: 0,
+          transition: 'none'
+        }).then();
+
+        $scope.isExpanded = false;
       }
 
-      $scope.setExpandable = function (element) {
+      ctrl.setExpandable = function (element) {
         expandable = element;
+        expHeight = element[0].getBoundingClientRect().height;
+
         expandable.css({
           'height': 0,
-          'opacity': 0
+          'opacity': 0,
         });
         // expandable.height = element[0].getBoundingRect().height;
       };
+
+      ctrl.setExpander = function (element) {
+        expander = element;
+      }
+
     },
     link: function (scope, element, attrs, ExpanderCtrl) {
+      ExpanderCtrl.setExpander(element);
+
+      element.css({
+        transition: 'height .3s .05s ease',
+      });
 
       element.on('click', function () {
-        console.log(click, scope.isExpanded);
         if ( scope.isExpanded ) {
           ExpanderCtrl.collapse();
         } else {
@@ -49,7 +80,7 @@ angular.module('person.expander', [])
 .directive('expandable', [function () {
   return {
     restrict: 'A',
-    scope: true,
+    scope: {},
     require: '^expander',
     link: function (scope, element, attrs, ExpanderCtrl) {
       ExpanderCtrl.setExpandable(element);
