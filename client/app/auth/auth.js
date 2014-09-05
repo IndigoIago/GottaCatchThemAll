@@ -2,14 +2,21 @@
 // Load the service module as a dependancy
 
 angular.module('catchem.auth', ['catchem.services'])
-.factory('AuthFactory', function() {
+.factory('AuthFactory', function($http) {
   var user = {
-    name: "Guest",
     loggedIn: false
   };
 
+  var isAuth = function () {
+    return $http({
+      method: 'GET',
+      url: '/loggedin'
+    });
+  };
+
   return {
-    user: user
+    user: user,
+    isAuth: isAuth
   }
 })
 .controller('AuthController', function(AuthFactory, $scope, $window, $state, $http) {
@@ -17,6 +24,9 @@ angular.module('catchem.auth', ['catchem.services'])
 
   $scope.FBlogout = function() {
     FB.logout(function(response) {
+      // Remove web token
+      $window.localStorage.removeItem('com.catchemall');
+
       // Person is now logged out
       AuthFactory.user.loggedIn = false;
 
@@ -84,11 +94,11 @@ angular.module('catchem.auth', ['catchem.services'])
   var testAPI = function() {
     // console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
-      console.log('Response data: ', response);
-      AuthFactory.user.fullname = response.name;
-      AuthFactory.user.firstname = response.first_name;
-      AuthFactory.user.lastname = response.last_name;
-      AuthFactory.user.id = response.id;
+      // console.log('Response data: ', response);
+      AuthFactory.user.full_name = response.name;
+      AuthFactory.user.first_name = response.first_name;
+      AuthFactory.user.last_name = response.last_name;
+      AuthFactory.user.facebook_id = response.id;
       AuthFactory.user.gender = response.gender;
       AuthFactory.user.loggedIn = true;
       
@@ -100,23 +110,24 @@ angular.module('catchem.auth', ['catchem.services'])
       Send to server:
 
       user = {
-        fullname: full name,
-        firstname: first name,
-        lastname: last name,
-        id: Facebook ID,
+        full_name: full name,
+        first_name: first name,
+        last_name: last name,
+        facebook_id: Facebook ID,
         email: email address,
         gender: gender
       }
       */
 
       $http({
-        url: 'http://localhost:3003/login',
+        url: '/login',
         method: "POST",
         data: AuthFactory.user
       })
       .then(function(response) {
         // Success
-        console.log(response.data);
+        // console.log("Got token: ", response.data.token);
+        $window.localStorage.setItem('com.catchemall', response.data.token);
       }, 
       function(response) { // optional
         // Error

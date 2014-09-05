@@ -3,14 +3,14 @@
   
   <!-- if user is logged in -->
   <div ng-if="user.loggedIn">
-    <button ng-click="FBlogout()">Sign out</button>
+    <button ng-click="FBlogout()">Log out</button>
 
-    <div ng-if="user.name">
-      Hello, {{ user.fullname }}!
+    <div ng-if="user.full_name">
+      Hello, {{ user.full_name }}!
     </div>
 
-    <div ng-if="user.id">
-      You are id#: {{ user.id }}
+    <div ng-if="user.facebook_id">
+      Your ID is: {{ user.facebook_id }}
     </div>
 
     <div ng-if="user.email">
@@ -20,7 +20,7 @@
 
   <!-- if user is not logged in -->
   <div ng-if="!user.loggedIn">
-    <button ng-click="FBlogin()">Sign in with Facebook</button>
+    <button ng-click="FBlogin()">Log in with Facebook</button>
 
     <div>Please log in</div>
   </div>
