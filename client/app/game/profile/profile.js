@@ -33,7 +33,7 @@ angular.module('game.profile', []) // Load the service module as a dependancy
     }, 200);
 
     // return a $timeout promise to delay the next question from appearing
-    return $timeout(angular.noop, 650); // 
+    return $timeout(angular.noop, 650);
   };
 
   var increaseProgressBar = function (element, percentage) {
