@@ -30,42 +30,47 @@ angular.module('person.expander', [])
       }
 
       ctrl.collapse = function () {
-
+        // set expander height back to normal
         expander.css({
           height: expander[0].getBoundingClientRect().height - expHeight + 'px',
         });
 
+        // hide expandable content
         expandable.css({
           height: 0,
           opacity: 0,
           transition: 'none'
-        }).then();
+        });
 
         $scope.isExpanded = false;
       }
 
       ctrl.setExpandable = function (element) {
         expandable = element;
+
+        // store the height for expanding later
         expHeight = element[0].getBoundingClientRect().height;
 
+        // hide expandable content
         expandable.css({
           'height': 0,
           'opacity': 0,
         });
-        // expandable.height = element[0].getBoundingRect().height;
       };
 
       ctrl.setExpander = function (element) {
+        // add a transition to the expander element
+        element.css({
+          transition: 'height .3s .05s',
+          '-webkit-transition': 'height .3s .05s'
+        });
+
         expander = element;
       }
 
     },
     link: function (scope, element, attrs, ExpanderCtrl) {
       ExpanderCtrl.setExpander(element);
-
-      element.css({
-        transition: 'height .3s .05s ease',
-      });
 
       element.on('click', function () {
         if ( scope.isExpanded ) {
@@ -86,4 +91,4 @@ angular.module('person.expander', [])
       ExpanderCtrl.setExpandable(element);
     }
   };
-}]);;
+}]);
