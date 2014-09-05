@@ -6,46 +6,46 @@
 //   Received from client:
   
 //   user = {
-//     fullname: full name,
-//     firstname: first name,
-//     lastname: last name,
+//     full_name: full name,
+//     first_name: first name,
+//     last_name: last name,
 //     id: Facebook ID,
 //     email: email address,
 //     gender: gender
 //   }
 
 var user1 = {
-  fullname: 'full name',
-  firstname: 'first name',
-  lastname: 'last name',
-  id: 123456,
+  full_name: 'full name',
+  first_name: 'first name',
+  last_name: 'last name',
+  facebook_id: 123456,
   email: 'email address',
   gender: 'gender'
 };
 
 var user2 = {
-  fullname: 'user2',
-  firstname: 'first name',
-  lastname: 'last name',
-  id: 234567,
+  full_name: 'user2',
+  first_name: 'first name',
+  last_name: 'last name',
+  facebook_id: 234567,
   email: 'email address',
   gender: 'gender'
 };
 
 var user3 = {
-  fullname: 'user3',
-  firstname: 'first name',
-  lastname: 'last name',
-  id: 345678,
+  full_name: 'user3',
+  first_name: 'first name',
+  last_name: 'last name',
+  facebook_id: 345678,
   email: 'email address',
   gender: 'gender'
 };
 
 var user4 = {
-  fullname: 'user4',
-  firstname: 'first name',
-  lastname: 'last name',
-  id: 456789,
+  full_name: 'user4',
+  first_name: 'first name',
+  last_name: 'last name',
+  facebook_id: 456789,
   email: 'email address',
   gender: 'gender'
 };
@@ -62,6 +62,8 @@ var user4 = {
 var express = require('express');
 var app = express(); // the Express instance
 var bodyParser = require('body-parser'); // to get data from POST:
+var jwt = require('jwt-simple');
+var Q = require('q');
 
 var db = require('./utils'); // NOTE: might be require('/../data')
 
@@ -133,8 +135,7 @@ app.get('/query/:dbCollectionToQuery',function(req,res){
  * try going to 'http://localhost:3003/saveUser/user1'
  ****************/
 app.get('/saveUser/:userToSaveToDB',function(req,res){
-  var userToSaveToDB = req.params.dbCollectionToQuery;
-
+  var userToSaveToDB = req.params.userToSaveToDB;
   if (userToSaveToDB === 'user1') {
     userToSaveToDB = user1;
   } else if (userToSaveToDB === 'user2') {
@@ -146,7 +147,7 @@ app.get('/saveUser/:userToSaveToDB',function(req,res){
   } else {
     userToSaveToDB = userToSaveToDB;
   }
-
+  
   var profiles = db.get('profiles');
   profiles.insert(userToSaveToDB, function (err, profile) {
     if(err) throw err;
@@ -160,22 +161,55 @@ app.get('/saveUser/:userToSaveToDB',function(req,res){
 // }; // end app.get(usersetup)
 
 app.post('/login', function(req, res, next) {
-  var fullname = req.body.fullname;
-  var password = req.body.password;
-
+  var fbid = req.body.facebook_id;
   var profiles = db.get('profiles');
+  var findOne = Q.nbind(profiles.findOne, profiles);
 
-  // This returns the user.
-  // TODO: query for user, then authenticate, then token?
-  profiles.findOne({
-    fullname: fullname
-  }, function(e, docs){
-    res.json(docs);
-  }); // end findOne()
+  findOne({facebook_id: fbid})
+    .then(function(user) {
+      if (user) {
+        // User exists, log in.
+        return user;
+      } else {
+        // User does not exist, insert into DB
+        insert = Q.nbind(profiles.insert, profiles);
+        return insert(req.body);
+      }
+    })
+    .then(function (user) {
+      // create token to send back for auth
+      var token = jwt.encode(user, 'secret');
+      res.json({token: token});
+    })
+    .fail(function (error) {
+      next(error);
+    });
 }); // end app.post(login)
 
-//   res.end('got your data: ' + JSON.stringify(req.body));
-// };
+app.get('/loggedin', function(req, res, next) {
+  // checking to see if the user is authenticated
+  // grab the token in the header is any
+  // then decode the token, which we end up being the user object
+  // check to see if that user exists in the database
+  var token = req.headers['x-access-token'];
+  if (!token) {
+    next(new Error('No token'));
+  } else {
+    var user = jwt.decode(token, 'secret');
+    var findUser = Q.nbind(profiles.findOne, profiles);
+    findUser({facebook_id: user.facebook_id})
+      .then(function (foundUser) {
+        if (foundUser) {
+          res.send(200);
+        } else {
+          res.send(401);
+        }
+      })
+      .fail(function (error) {
+        next(error);
+      });
+  }
+});
 
 module.exports = app; // export app for router.js
 

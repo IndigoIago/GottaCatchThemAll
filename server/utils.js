@@ -12,7 +12,6 @@ var db = monk('localhost:27017/catchem'); // TODO: update host and database name
 // Examples
 var users = db.get('users');
 users.index('name last'); // get users collection ==> users.insert(), users.update(), etc.
-
 // db.close();
 
 
