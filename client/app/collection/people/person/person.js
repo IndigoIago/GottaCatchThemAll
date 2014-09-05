@@ -1,5 +1,5 @@
 // Person module - contains Person directives for displaying single-person views
-angular.module('people.person', [])
+angular.module('people.person', ['person.expander'])
 .directive('person', [function () {
   return {
     restrict: 'E',
