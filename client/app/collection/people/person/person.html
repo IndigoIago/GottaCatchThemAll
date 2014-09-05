@@ -1,8 +1,20 @@
-<div class="col-xs-12 person">
+<div class="col-xs-12 person" expander>
   <div class="photo col-xs-3">
-    <img style="width: 50px; border-radius: 999px" src="img/douglas_c.png" alt="">
+    <img src="img/douglas_c.png" alt="">
   </div>
-  <div class="person-info col-xs-8">
+  <div class="person-info col-xs-5">
     <span> {{data.name}} </span>
+  </div>
+  <div class="col-xs-3">
+    <div class="person-nav">
+      <span class="glyphicon glyphicon-envelope"></span>
+      <span class="glyphicon glyphicon-remove"></span>
+    </div>
+  </div>
+
+  <!-- bio section -->
+  <div class="col-xs-12" expandable>
+    <h1> some test content</h1>
+    <p> more test content more test content more test content more test content more test content </p>
   </div>
 </div>
