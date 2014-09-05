@@ -31,7 +31,7 @@ git pull --rebase upstream master
 git push origin bug/0day
 ```
 5. Check if there arent any major change that will conflict with yours on the waitting pull requests. If there is, check if you can accept it.
-6.submit a [pull request][] directly to master from your branch. Include a description of your changes.
+6.submit a [pull request][] directly to master from your branch. Include a description of your changes. If there are any issues related to your Pull Request, reference it on the message. (ex: fixes #44)
 7. Your pull request will be reviewed by another maintainer. The point of code
    reviews is to help keep the codebase clean and of high quality and, equally
    as important, to help you grow as a programmer. If your code reviewer
