@@ -121,34 +121,33 @@ body {
   text-align: center;
   font-size: 1.4em;
   padding: 2em 0;
-  height: 999px;
 }
 
-/* line 47, ../sass/_main.sass */
+/* line 46, ../sass/_main.sass */
 .question-wrapper .question {
   font-weight: bold;
   margin: 1em 0;
   font-size: 1.3em;
 }
-/* line 51, ../sass/_main.sass */
+/* line 50, ../sass/_main.sass */
 .question-wrapper .answer {
   margin: 2em 0;
 }
 
-/* line 55, ../sass/_main.sass */
+/* line 54, ../sass/_main.sass */
 .answer span {
   font-weight: bold;
 }
-/* line 57, ../sass/_main.sass */
+/* line 56, ../sass/_main.sass */
 .answer .yes {
   color: green;
 }
-/* line 59, ../sass/_main.sass */
+/* line 58, ../sass/_main.sass */
 .answer .no {
   color: red;
 }
 
-/* line 62, ../sass/_main.sass */
+/* line 61, ../sass/_main.sass */
 .yes, .no {
   padding: 0 1em;
   cursor: pointer;
