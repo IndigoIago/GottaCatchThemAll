@@ -6,15 +6,18 @@ angular.module('catchem.game', ['catchem.services', 'game.profile']) // Load the
      * GAME LOGIC
      * Gameplay actions go here
      ****************/
-    $scope.aProfile = getAProfile();
+    $scope.aProfile = playerGetsNewProfile();
 
     $scope.roundHandler = function(isWinner) {
       // for debugging
-      isWinner ? console.log('You won!') : console.log('You lost :(');
-
       if (isWinner) {
-        Collection.addProfile($scope.aProfile)
-      }
+        console.log('You won!');
+        Collection.addProfile($scope.aProfile);
+      } else {
+        console.log('You lost :\'(');
+      } // end if (isWinner)
+
+      return $scope.aProfile.name; // send back name
     }; // end roundHandler()
   } // end controller callback()
 ]); // end .controller()
@@ -34,6 +37,7 @@ var getAProfile = function(options) {
     photo: './img/douglas_c.png',
     questions: [
       {question: 'Do I like JavaScript?', answer: true},
+      {question: 'Did I invent the Javascripts?', answer: true},
       {question: 'Do I like incrementing numbers with "++"?', answer: false}
     ],
     pointValue: 1400
@@ -93,34 +97,32 @@ var getAProfile = function(options) {
 
   // TODO: access profiles from DB...
   var usersKeys = Object.keys(sampleUsers); // an array of sampleUser's keys. TODO: Replace with DB query
-  console.log('usersKeys =', usersKeys);
-
   var randUserKey = usersKeys[(Math.random() * usersKeys.length << 0)];
-  console.log('randUserKey =', randUserKey);
-
   var result = sampleUsers[randUserKey]; // result is one of the profiles.
-  console.log('result =', result);
   return result; // return profile
 }; // end getAProfile
 
 
-/*         Next step...
   // Player gets profile
-  $scope.playerGetsNewProfile = function (profile) { // check history with this profile
-    var thisPlayer = db.find(_id);
-    var listOfViewedProfiles = db.find(thisPlayer.viewedProfiles);
-    var thisPlayersStatusForServedProfile = listOfViewedProfiles.profile._id;
+var playerGetsNewProfile = function (profile) { // check history with this profile
+  var tempProfile = getAProfile();
 
-    if (thisPlayersStatusForServedProfile === 'undefined') { // never visited
-      // PLAY GAME!
-    } else if (thisPlayersStatusForServedProfile === 'REJECTED' || thisPlayersStatusForServedProfile === 'COLLECTED') { // previously rejected
-      // SERVE NEW PROFILE
+  // var thisPlayer = db.find(_id);
+  // var listOfViewedProfiles = db.find(thisPlayer.viewedProfiles);
+  // var thisPlayersStatusForServedProfile = listOfViewedProfiles.profile._id;
 
-    } else { // in progress
-      // CONTINUE GAME
+  // if (thisPlayersStatusForServedProfile === 'undefined') { // never visited
+  //   return tempProfile;
+  // } else if (thisPlayersStatusForServedProfile === 'REJECTED' || thisPlayersStatusForServedProfile === 'COLLECTED') { // previously rejected
+  //   // SERVE NEW PROFILE
 
-    }
+  // } else { // in progress
+  //   // CONTINUE GAME
 
-    // 
-  }; // end playerGetsNewProfile(profile)
-*/
+  // }
+
+  return tempProfile;  
+}; // end playerGetsNewProfile(profile)
+
+var profileCollected = function() {
+}; // end profileCollection
