@@ -193,16 +193,22 @@ app.get('/loggedin', function(req, res, next) {
   // check to see if that user exists in the database
   var token = req.headers['x-access-token'];
   if (!token) {
-    next(new Error('No token'));
+    // next(new Error('No token'));
+    console.log('No token!');
+    res.status(403).end();
   } else {
+    console.log('Token found!:', token);
+
     var user = jwt.decode(token, 'secret');
+    var profiles = db.get('profiles');
     var findUser = Q.nbind(profiles.findOne, profiles);
     findUser({facebook_id: user.facebook_id})
       .then(function (foundUser) {
         if (foundUser) {
-          res.send(200);
+          console.log('User found!:', foundUser.full_name);
+          res.status(200).end();
         } else {
-          res.send(401);
+          res.status(401).end();
         }
       })
       .fail(function (error) {
