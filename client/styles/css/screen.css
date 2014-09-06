@@ -65,12 +65,22 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 
 /* line 1, ../sass/_main.sass */
 body {
-  background: #fcfcfc;
+  min-height: 768px;
+  background-repeat: repeat-y;
+  background-image: -webkit-linear-gradient(45deg, #49f1cf, #3b42ff);
+  background-image: -moz-linear-gradient(45deg, #49f1cf, #3b42ff);
+  background-image: linear-gradient(-160deg, #49f1cf, #3b42ff);
+  background-color: #49a3f1;
   overflow: hidden;
   font-family: "Open Sans", sans-serif;
 }
 
-/* line 9, ../sass/_main.sass */
+/* line 11, ../sass/_main.sass */
+.game {
+  background: #FFF;
+}
+
+/* line 16, ../sass/_main.sass */
 .profile-card .header {
   height: 35px;
   width: 100%;
@@ -81,32 +91,32 @@ body {
   position: fixed;
   z-index: 2000;
 }
-/* line 18, ../sass/_main.sass */
+/* line 25, ../sass/_main.sass */
 .profile-card .name span {
   margin: 10px;
 }
-/* line 20, ../sass/_main.sass */
+/* line 27, ../sass/_main.sass */
 .profile-card .point-value {
   text-align: right;
 }
-/* line 22, ../sass/_main.sass */
+/* line 29, ../sass/_main.sass */
 .profile-card .photo {
   top: -30px;
   width: 100%;
 }
-/* line 25, ../sass/_main.sass */
+/* line 32, ../sass/_main.sass */
 .profile-card .photo img {
   width: 100%;
   margin-top: -20px;
 }
-/* line 28, ../sass/_main.sass */
+/* line 35, ../sass/_main.sass */
 .profile-card .progress-wrapper {
   height: 20px;
   background: #333;
   width: 100%;
   display: block;
 }
-/* line 33, ../sass/_main.sass */
+/* line 40, ../sass/_main.sass */
 .profile-card .question-wrapper {
   text-align: center;
   font-size: 1.4em;
@@ -114,61 +124,97 @@ body {
   height: 999px;
 }
 
-/* line 40, ../sass/_main.sass */
+/* line 47, ../sass/_main.sass */
 .question-wrapper .question {
   font-weight: bold;
   margin: 1em 0;
   font-size: 1.3em;
 }
-/* line 44, ../sass/_main.sass */
+/* line 51, ../sass/_main.sass */
 .question-wrapper .answer {
   margin: 2em 0;
 }
 
-/* line 48, ../sass/_main.sass */
+/* line 55, ../sass/_main.sass */
 .answer span {
   font-weight: bold;
 }
-/* line 50, ../sass/_main.sass */
+/* line 57, ../sass/_main.sass */
 .answer .yes {
   color: green;
 }
-/* line 52, ../sass/_main.sass */
+/* line 59, ../sass/_main.sass */
 .answer .no {
   color: red;
 }
 
-/* line 55, ../sass/_main.sass */
+/* line 62, ../sass/_main.sass */
 .yes, .no {
   padding: 0 1em;
   cursor: pointer;
 }
 
+/* line 1, ../sass/_menu.sass */
+.menu {
+  margin: 50% 0;
+}
+/* line 4, ../sass/_menu.sass */
+.menu .btn-option {
+  transition: none;
+  background: transparent;
+  border: 2px solid white;
+  margin: 20px 0;
+  color: white;
+  height: 50px;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 17px;
+  line-height: 1.42857;
+  border-radius: 4px;
+  width: 100%;
+}
+/* line 24, ../sass/_menu.sass */
+.menu .btn-option:hover {
+  background: white;
+  color: #429BE6;
+}
+
 /* line 1, ../sass/_collection.sass */
+.collection {
+  background: #FFF;
+}
+
+/* line 3, ../sass/_collection.sass */
 .person {
   padding: 10px;
   border-bottom: 1px solid #ddd;
 }
-/* line 5, ../sass/_collection.sass */
+/* line 7, ../sass/_collection.sass */
 .person .person-info {
   padding: 15px 0;
 }
-/* line 8, ../sass/_collection.sass */
+/* line 10, ../sass/_collection.sass */
 .person .photo img {
   border-radius: 999px;
   width: 50px;
 }
-/* line 12, ../sass/_collection.sass */
+/* line 14, ../sass/_collection.sass */
 .person .person-nav {
   margin: 15px 0;
 }
-/* line 15, ../sass/_collection.sass */
+/* line 17, ../sass/_collection.sass */
 .person .person-nav span {
   cursor: pointer;
   margin: 0 7px;
 }
 
-/* line 19, ../sass/_collection.sass */
+/* line 21, ../sass/_collection.sass */
 .person:hover {
   background: #fcfcfc;
 }
