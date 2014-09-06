@@ -2,11 +2,13 @@ angular.module('catchem', [
   'catchem.auth',
   'catchem.game',
   'catchem.user',
+  'catchem.menu',
   'catchem.collection',
   'catchem.services',
-  'ui.router'
+  'ui.router',
+  'ngMorph'
 ]) // this will remain barebones; it only loads modules.
-.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider
     .state('login', {
       url: '/login',
@@ -23,25 +25,26 @@ angular.module('catchem', [
       templateUrl: 'app/user/profilesetup.html',
       controller: 'UserController'
     })
-    .state('play', {
-      url: '/play',
-      templateUrl: 'app/game/game.html',
-      controller: 'GameCtrl'
-    })
     .state('collection', {
-      url: '/collection',
       templateUrl: 'app/collection/collection.html',
       controller: 'CollectionCtrl'
+    })
+    .state('menu', {
+      url: '/menu',
+      views: {
+        '': {
+          templateUrl: 'app/menu/menu.html',
+          controller: 'MenuCtrl',
+        },
+      }
     });
 
   $urlRouterProvider.otherwise('/login');
-
   // We add our $httpInterceptor into the array
   // of interceptors. Think of it like middleware for your ajax calls
   // [interceptors](https://github.com/angular/angular.js/blob/master/src/ng/http.js#L337)
-  $httpProvider.interceptors.push('AttatchTokens');
-})
-
+  $httpProvider.interceptors.push('AttatchTokens')
+}])
 //////////////////////////////////////////////
 // Code below from Shortly-Angular-Solution //
 //////////////////////////////////////////////
