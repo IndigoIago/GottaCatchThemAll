@@ -85,7 +85,7 @@ var getAProfile = function(options) {
 
 
   var sampleUsers = {
-    1234561: user1,
+    1234561: user1, // temporarily just testing with douglas 
     // 1234562: user2,
     // 1234563: user3,
     // 1234564: user4
