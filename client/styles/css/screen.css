@@ -142,13 +142,13 @@ body {
   top: -54%;
   position: relative;
   display: block;
-  background: rgba(0, 0, 0, 0.65);
 }
-/* line 41, ../sass/_main.sass */
+/* line 40, ../sass/_main.sass */
 .navigation > * {
   text-align: center;
   padding: 1em;
   cursor: pointer;
+  -webkit-filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.2));
 }
 
 /* line 45, ../sass/_main.sass */
