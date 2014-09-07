@@ -2,11 +2,7 @@
 // Load the service module as a dependancy
 
 angular.module('catchem.auth', ['catchem.services'])
-.factory('AuthFactory', function($http, $state, $window) {
-  var user = {
-    loggedIn: false
-  };
-
+.factory('AuthFactory', function($http, $state, $window, User) {
   $window.fbAsyncInit = function() {
     FB.init({
       appId      : '596181923827041',
@@ -46,8 +42,8 @@ angular.module('catchem.auth', ['catchem.services'])
       $window.localStorage.removeItem('com.catchemall');
 
       // Person is now logged out
-      user = {};
-      user.loggedIn = false;
+      // user = {};
+      User.setPersonalProfile("loggedIn", false);
 
       // Without this, the $scope doesn't update in the view
       // $scope.$apply();
@@ -91,15 +87,15 @@ angular.module('catchem.auth', ['catchem.services'])
     // console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
       // console.log('Response data: ', response);
-      user.full_name = response.name;
-      user.first_name = response.first_name;
-      user.last_name = response.last_name;
-      user.facebook_id = response.id;
-      user.gender = response.gender;
-      user.loggedIn = true;
+      User.setPersonalProfile("full_name", response.name);
+      User.setPersonalProfile("first_name", response.first_name);
+      User.setPersonalProfile("last_name", response.last_name);
+      User.setPersonalProfile("facebook_id", response.id);
+      User.setPersonalProfile("gender", response.gender);
+      User.setPersonalProfile("loggedIn", true);
       
       if (response.email) {
-        user.email = response.email;
+        User.setPersonalProfile("email", response.email);
       }
 
       /*
@@ -118,7 +114,7 @@ angular.module('catchem.auth', ['catchem.services'])
       $http({
         url: '/login',
         method: 'POST',
-        data: user
+        data: User.getPersonalProfile()
       })
       .then(function(response) {
         // Success
@@ -128,7 +124,7 @@ angular.module('catchem.auth', ['catchem.services'])
         $window.localStorage.setItem('com.catchemall', response.data.token);
 
         // Redirect to play screen
-        $state.go('play');
+        // $state.go('play');
       }, 
       function(response) { // optional
         // Error
@@ -137,7 +133,7 @@ angular.module('catchem.auth', ['catchem.services'])
   }
 
   return {
-    user: user,
+    user: User.getPersonalProfile(),
     isAuth: isAuth,
     FBlogin: FBlogin,
     FBlogout: FBlogout,
@@ -146,7 +142,7 @@ angular.module('catchem.auth', ['catchem.services'])
     // fbAsyncInit: fbAsyncInit
   }
 })
-.controller('AuthController', function(AuthFactory, $scope, $window) {
+.controller('AuthController', function(AuthFactory, $scope) {
   $scope.user = AuthFactory.user;
   $scope.FBlogout = AuthFactory.FBlogout;
   $scope.FBlogin = AuthFactory.FBlogin;

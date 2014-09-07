@@ -1,5 +1,38 @@
 angular.module('catchem.user', ['catchem.services'])
-.controller('UserController', ['$scope', function($scope) {
+.factory("UserFactory", function(User){
+  var myProfile = User.getPersonalProfile();
+
+  var updateAbout = function(message) {
+    User.setPersonalProfile("about", message);
+    User.savePersonalProfileToDB();
+    myProfile = User.getPersonalProfile();
+  };
+
+  var addQuestion = function(question, answer) {
+    if (!myProfile.questions) {
+      myProfile.questions = [];
+    }
+
+    myProfile.questions.push({
+      question: question,
+      answer: answer
+    });
+
+    User.setPersonalProfile("questions", myProfile.questions);
+
+    User.savePersonalProfileToDB();
+  }
+
+  return {
+    updateAbout: updateAbout,
+    myProfile: myProfile,
+    addQuestion: addQuestion
+  }
+})
+.controller('UserController', ['$scope', 'User', 'UserFactory', function($scope, User, UserFactory) {
+  // Is the question and answer input empty?
+  $scope.blank = false;
+
   $scope.aProfile = {
     name: 'Douglas Crockford',
     photo: './img/douglas_c.png',
@@ -14,13 +47,28 @@ angular.module('catchem.user', ['catchem.services'])
     ],
     pointValue: 1400
   };
+
+  $scope.myProfile = UserFactory.myProfile;
+
+  $scope.updateAbout = function() {
+    UserFactory.updateAbout($scope.about);
+  }
+
+  $scope.addQuestion = function() {
+    if (!$scope.question || !$scope.answer) {
+      $scope.blank = true;
+    } else {
+      $scope.blank = false;
+      UserFactory.addQuestion($scope.question, $scope.answer);
+    }
+  }
 }]);
 
 
 
 /*          MOSTLY-OFFICIAL USER TEMPLATE
   id = {
-    id: 1234561,
+    facebook_id: 1234561,
     full_name:    'Douglas Crockford',
     first_name:   'Douglas',
     last_name:    'Crockford',
