@@ -76,11 +76,39 @@ body {
 }
 
 /* line 11, ../sass/_main.sass */
+.title {
+  font-family: "Delius Swash Caps", sans-serif;
+  text-align: center;
+  top: 2em;
+  position: relative;
+  color: white;
+  font-size: 3.5em;
+  letter-spacing: -0.04em;
+  -webkit-transform: rotate(-4deg);
+}
+
+/* line 21, ../sass/_main.sass */
+.pulse {
+  -webkit-animation: pulse_a 0.5s linear 0.5s infinite;
+}
+
+@-webkit-keyframes pulse_a {
+  0% {
+    -webkit-transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.05);
+  }
+  100% {
+    -webkit-transform: scale(1);
+  }
+}
+/* line 32, ../sass/_main.sass */
 .game {
   background: #FFF;
 }
 
-/* line 16, ../sass/_main.sass */
+/* line 37, ../sass/_main.sass */
 .profile-card .header {
   height: 35px;
   width: 100%;
@@ -91,63 +119,63 @@ body {
   position: fixed;
   z-index: 2000;
 }
-/* line 25, ../sass/_main.sass */
+/* line 46, ../sass/_main.sass */
 .profile-card .name span {
   margin: 10px;
 }
-/* line 27, ../sass/_main.sass */
+/* line 48, ../sass/_main.sass */
 .profile-card .point-value {
   text-align: right;
 }
-/* line 29, ../sass/_main.sass */
+/* line 50, ../sass/_main.sass */
 .profile-card .photo {
   top: -30px;
   width: 100%;
 }
-/* line 32, ../sass/_main.sass */
+/* line 53, ../sass/_main.sass */
 .profile-card .photo img {
   width: 100%;
   margin-top: -20px;
 }
-/* line 35, ../sass/_main.sass */
+/* line 56, ../sass/_main.sass */
 .profile-card .progress-wrapper {
   height: 20px;
   background: #333;
   width: 100%;
   display: block;
 }
-/* line 40, ../sass/_main.sass */
+/* line 61, ../sass/_main.sass */
 .profile-card .question-wrapper {
   text-align: center;
   font-size: 1.4em;
   padding: 2em 0;
 }
 
-/* line 46, ../sass/_main.sass */
+/* line 67, ../sass/_main.sass */
 .question-wrapper .question {
   font-weight: bold;
   margin: 1em 0;
   font-size: 1.3em;
 }
-/* line 50, ../sass/_main.sass */
+/* line 71, ../sass/_main.sass */
 .question-wrapper .answer {
   margin: 2em 0;
 }
 
-/* line 54, ../sass/_main.sass */
+/* line 75, ../sass/_main.sass */
 .answer span {
   font-weight: bold;
 }
-/* line 56, ../sass/_main.sass */
+/* line 77, ../sass/_main.sass */
 .answer .yes {
   color: green;
 }
-/* line 58, ../sass/_main.sass */
+/* line 79, ../sass/_main.sass */
 .answer .no {
   color: red;
 }
 
-/* line 61, ../sass/_main.sass */
+/* line 82, ../sass/_main.sass */
 .yes, .no {
   padding: 0 1em;
   cursor: pointer;

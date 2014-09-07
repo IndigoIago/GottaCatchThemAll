@@ -8,6 +8,27 @@ body
   overflow: hidden
   font-family: 'Open Sans', sans-serif
 
+.title
+  font-family: 'Delius Swash Caps', sans-serif
+  text-align: center
+  top: 2em
+  position: relative
+  color: white
+  font-size: 3.5em
+  letter-spacing: -.04em
+  -webkit-transform: rotate(-4deg)
+
+.pulse
+  -webkit-animation: pulse_a .5s linear .5s infinite
+
+@-webkit-keyframes pulse_a
+  0% 
+    -webkit-transform: scale(1)
+  50% 
+    -webkit-transform: scale(1.05)
+  100%
+    -webkit-transform: scale(1)
+
 .game
   background: #FFF
 // profiles
