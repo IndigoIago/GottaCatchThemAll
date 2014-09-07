@@ -1,11 +1,54 @@
 body
-  background: #fcfcfc
+  min-height: 768px
+  background-repeat: repeat-y
+  background-image: -webkit-linear-gradient(45deg, #49f1cf, #3b42ff)
+  background-image: -moz-linear-gradient(45deg, #49f1cf, #3b42ff)
+  background-image: linear-gradient(-160deg, #49f1cf, #3b42ff)
+  background-color: #49a3f1
   overflow: hidden
   font-family: 'Open Sans', sans-serif
 
+.title
+  font-family: 'Delius Swash Caps', sans-serif
+  text-align: center
+  top: 2em
+  position: relative
+  color: white
+  font-size: 3.5em
+  letter-spacing: -.04em
+  -webkit-transform: rotate(-4deg)
+
+.pulse
+  -webkit-animation: pulse_a .5s linear .5s infinite
+
+@-webkit-keyframes pulse_a
+  0% 
+    -webkit-transform: scale(1)
+  50% 
+    -webkit-transform: scale(1.05)
+  100%
+    -webkit-transform: scale(1)
+
+.navigation
+  height: 60px
+  width: 100%
+  color: #fcfcfc
+  top: -54%
+  position: relative
+  display: block
+
+  > *
+    text-align: center
+    padding: 1em
+    cursor: pointer
+    -webkit-filter: drop-shadow(1px 1px 1px rgba(0,0,0,.2))
+.game
+  background: #FFF
+  height: 100%
 // profiles
 
 .profile-card
+  height: 768px
   .header
     height: 35px
     width: 100%
@@ -20,40 +63,47 @@ body
   .point-value
     text-align: right
   .photo
-    top: -30px
-    width: 100%
+    height: 120%
+    overflow: hidden
     img
-      width: 100%
-      margin-top: -20px
-  .progress-wrapper
-    height: 20px
-    background: #333
+      height: 100%
+      margin-top: -50px
+      left: -10px
+      position: relative
+  .displaybar-wrapper
+    padding: 0
+    height: 100px
     width: 100%
-    display: block
-  .question-wrapper
-    text-align: center
-    font-size: 1.4em
-    padding: 2em 0
-    height: 999px //nasty hack to get the container to span full-height
+    background: rgba(0,0,0,0.5)
+    top: -60%
 
-.question-wrapper
-  .question
-    font-weight: bold
-    margin: 1em 0
-    font-size: 1.3em
-  .answer
-    margin: 2em 0
+    .question-wrapper
+      position: absolute
+      text-align: center
+      font-size: 1.5em
+      padding: 10px 0 0 25px
+      color: #fcfcfc
+      width: 100%
 
-.answer
-  span
-    font-weight: bold
-  .yes
-    color: green
-  .no
-    color: red
 
-.yes, .no
-  padding: 0 1em
-  cursor: pointer
+  .answer-wrapper
+    width: 100%
+    height: 100px
+    top: -60%
 
-.yes:hover!, .no:hover!
+    .btn-option.yes, 
+    .btn-option.no
+      margin: 45px 0
+
+    .btn-option.yes 
+      background: rgba(118, 224, 112, 0.3)
+      &:hover
+        background: rgba(118, 224, 112, 0.6)
+        color: white
+
+    .btn-option.no 
+      background: rgba(255, 125, 125, 0.3)
+      &:hover
+        background: rgba(255, 125, 125, 0.6)
+        color: white
+

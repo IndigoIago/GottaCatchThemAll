@@ -4,20 +4,26 @@
     <title>catch'em</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Delius+Swash+Caps">
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
-    <!-- Might have to change according to the routing  -->
+    <link rel="stylesheet" href="lib/fontawesome/css/font-awesome.css">
     <link rel="stylesheet" href="styles/css/screen.css">
   </head>
   <body>
+    <div class="bgfx"></div>
+    
     <div id="fb-root"></div>
-
-    <div class="container"> <!-- app view container -->
-      <div ui-view class="row"></div> 
+    <div class="title">
+      <h1 class="pulse"> Catchem! </h1>
+    </div>
+    <div class="container" ui-view> <!-- app view container -->
     </div>
 
     <!-- load dependencies here -->
     <script src="lib/angular/angular.js"></script>
     <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="lib/angular-morph/dist/angular-morph.js"></script>
+
 
     <script src="app/collection/people/person/expandable.js"></script>
   
@@ -28,6 +34,7 @@
     <script src="app/game/game.js"></script>
     <script src="app/game/profile/profile.js"></script>
     <script src="app/user/user.js"></script>
+    <script src="app/menu/menu.js"></script>
     <script src="app/services/services.js"></script>
     <script src="app/app.js"></script>
 

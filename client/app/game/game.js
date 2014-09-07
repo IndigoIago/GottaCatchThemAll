@@ -34,7 +34,7 @@ var getAProfile = function(options) {
    ****************/
   var user1 = {
     name: 'Douglas Crockford',
-    photo: './img/douglas_c.png',
+    photo: './img/douglas_c.jpg',
     questions: [
       {question: 'Do I like JavaScript?', answer: true},
       {question: 'Did I invent the Javascripts?', answer: true},
@@ -85,10 +85,10 @@ var getAProfile = function(options) {
 
 
   var sampleUsers = {
-    1234561: user1,
-    1234562: user2,
-    1234563: user3,
-    1234564: user4
+    1234561: user1, // temporarily just testing with douglas 
+    // 1234562: user2,
+    // 1234563: user3,
+    // 1234564: user4
   };
 
   /*****************
