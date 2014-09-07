@@ -26,24 +26,21 @@ angular.module('catchem', [
       controller: 'UserController'
     })
     .state('collection', {
+      url: '/collection',
       templateUrl: 'app/collection/collection.html',
       controller: 'CollectionCtrl'
     })
     .state('menu', {
       url: '/menu',
-      views: {
-        '': {
-          templateUrl: 'app/menu/menu.html',
-          controller: 'MenuCtrl',
-        },
-      }
+      templateUrl: 'app/menu/menu.html',
+      controller: 'MenuCtrl',
     });
 
   $urlRouterProvider.otherwise('/login');
   // We add our $httpInterceptor into the array
   // of interceptors. Think of it like middleware for your ajax calls
   // [interceptors](https://github.com/angular/angular.js/blob/master/src/ng/http.js#L337)
-  $httpProvider.interceptors.push('AttatchTokens')
+  // $httpProvider.interceptors.push('AttatchTokens')
 }])
 //////////////////////////////////////////////
 // Code below from Shortly-Angular-Solution //
@@ -76,12 +73,12 @@ angular.module('catchem', [
   // when it does change routes, we then look for the token in localstorage
   // and send that token to the server to see if it is a real user or hasn't expired
   // if it's not valid, we then redirect back to signin/signup
-  $rootScope.$on('$stateChangeStart', function (evt, next, current) {
-    if (next.controller && next.controller !== 'AuthController') {
-      AuthFactory.isAuth()
-        .catch(function () {
-          $state.go('login');
-        });
-    }
-  });
+  // $rootScope.$on('$stateChangeStart', function (evt, next, current) {
+  //   if (next.controller && next.controller !== 'AuthController') {
+  //     AuthFactory.isAuth()
+  //       .catch(function () {
+  //         $state.go('login');
+  //       });
+  //   }
+  // });
 });

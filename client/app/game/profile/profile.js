@@ -115,4 +115,3 @@ angular.module('game.profile', []) // Load the service module as a dependancy
 
 
 }]); // end module().directive()
-
