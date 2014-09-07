@@ -63,6 +63,37 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   display: block;
 }
 
+/* line 1, ../sass/_menu.sass */
+.menu {
+  margin: 50% 0;
+}
+/* line 4, ../sass/_menu.sass */
+.menu .btn-option {
+  transition: none;
+  background: transparent;
+  border: 2px solid white;
+  margin: 20px 0;
+  color: white;
+  height: 50px;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 17px;
+  line-height: 1.42857;
+  border-radius: 4px;
+  width: 100%;
+}
+/* line 24, ../sass/_menu.sass */
+.menu .btn-option:hover {
+  background: white;
+  color: #429BE6;
+}
+
 /* line 1, ../sass/_main.sass */
 body {
   min-height: 768px;
@@ -104,11 +135,26 @@ body {
   }
 }
 /* line 32, ../sass/_main.sass */
-.game {
-  background: #FFF;
+.navigation {
+  height: 60px;
+  width: 100%;
+  top: -28%;
+  position: relative;
+  display: block;
+  background: rgba(0, 0, 0, 0.65);
 }
 
-/* line 37, ../sass/_main.sass */
+/* line 40, ../sass/_main.sass */
+.game {
+  background: #FFF;
+  height: 100%;
+}
+
+/* line 45, ../sass/_main.sass */
+.profile-card {
+  height: 768px;
+}
+/* line 47, ../sass/_main.sass */
 .profile-card .header {
   height: 35px;
   width: 100%;
@@ -119,97 +165,70 @@ body {
   position: fixed;
   z-index: 2000;
 }
-/* line 46, ../sass/_main.sass */
+/* line 56, ../sass/_main.sass */
 .profile-card .name span {
   margin: 10px;
 }
-/* line 48, ../sass/_main.sass */
+/* line 58, ../sass/_main.sass */
 .profile-card .point-value {
   text-align: right;
 }
-/* line 50, ../sass/_main.sass */
+/* line 60, ../sass/_main.sass */
 .profile-card .photo {
-  top: -30px;
-  width: 100%;
+  height: 120%;
+  overflow: hidden;
 }
-/* line 53, ../sass/_main.sass */
+/* line 63, ../sass/_main.sass */
 .profile-card .photo img {
-  width: 100%;
-  margin-top: -20px;
+  -webkit-filter: blur(5px);
+  filter: blur(5px);
+  height: 100%;
+  margin-top: -50px;
+  left: -10px;
+  position: relative;
 }
-/* line 56, ../sass/_main.sass */
-.profile-card .progress-wrapper {
-  height: 20px;
-  background: #333;
-  width: 100%;
-  display: block;
-}
-/* line 61, ../sass/_main.sass */
+/* line 69, ../sass/_main.sass */
 .profile-card .question-wrapper {
-  text-align: center;
-  font-size: 1.4em;
-  padding: 2em 0;
-}
-
-/* line 67, ../sass/_main.sass */
-.question-wrapper .question {
-  font-weight: bold;
-  margin: 1em 0;
-  font-size: 1.3em;
-}
-/* line 71, ../sass/_main.sass */
-.question-wrapper .answer {
-  margin: 2em 0;
-}
-
-/* line 75, ../sass/_main.sass */
-.answer span {
-  font-weight: bold;
-}
-/* line 77, ../sass/_main.sass */
-.answer .yes {
-  color: green;
-}
-/* line 79, ../sass/_main.sass */
-.answer .no {
-  color: red;
-}
-
-/* line 82, ../sass/_main.sass */
-.yes, .no {
-  padding: 0 1em;
-  cursor: pointer;
-}
-
-/* line 1, ../sass/_menu.sass */
-.menu {
-  margin: 50% 0;
-}
-/* line 4, ../sass/_menu.sass */
-.menu .btn-option {
-  transition: none;
-  background: transparent;
-  border: 2px solid white;
-  margin: 20px 0;
-  color: white;
-  height: 50px;
-  margin-bottom: 0;
-  font-weight: normal;
-  text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
-  background-image: none;
-  white-space: nowrap;
-  padding: 6px 12px;
-  font-size: 17px;
-  line-height: 1.42857;
-  border-radius: 4px;
+  height: 100px;
   width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  top: -60%;
 }
-/* line 24, ../sass/_menu.sass */
-.menu .btn-option:hover {
-  background: white;
-  color: #429BE6;
+/* line 75, ../sass/_main.sass */
+.profile-card .question-wrapper .question {
+  text-align: center;
+  font-size: 1.5em;
+  padding: 10px;
+  color: #fcfcfc;
+}
+/* line 81, ../sass/_main.sass */
+.profile-card .answer-wrapper {
+  width: 100%;
+  height: 100px;
+  top: -60%;
+}
+/* line 86, ../sass/_main.sass */
+.profile-card .answer-wrapper .btn-option.yes,
+.profile-card .answer-wrapper .btn-option.no {
+  margin: 45px 0;
+}
+/* line 90, ../sass/_main.sass */
+.profile-card .answer-wrapper .btn-option.yes {
+  background: rgba(118, 224, 112, 0.3);
+}
+/* line 92, ../sass/_main.sass */
+.profile-card .answer-wrapper .btn-option.yes:hover {
+  background: rgba(118, 224, 112, 0.6);
+  color: white;
+}
+/* line 96, ../sass/_main.sass */
+.profile-card .answer-wrapper .btn-option.no {
+  background: rgba(255, 125, 125, 0.3);
+}
+/* line 98, ../sass/_main.sass */
+.profile-card .answer-wrapper .btn-option.no:hover {
+  background: rgba(255, 125, 125, 0.6);
+  color: white;
 }
 
 /* line 1, ../sass/_collection.sass */
@@ -244,4 +263,9 @@ body {
 /* line 21, ../sass/_collection.sass */
 .person:hover {
   background: #fcfcfc;
+}
+
+/* line 1, ../sass/_playersetup.sass */
+.profile-setup {
+  background: white;
 }
