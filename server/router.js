@@ -217,30 +217,6 @@ app.get('/loggedin', function(req, res, next) {
   }
 });
 
-app.get('/userprofile', function(req, res, next) {
-  var token = req.headers['x-access-token'];
-  if (!token) {
-    console.log('No token!');
-    res.status(403).end();
-  } else {
-    var user = jwt.decode(token, 'secret');
-    var profiles = db.get('profiles');
-    var findUser = Q.nbind(profiles.findOne, profiles);
-    findUser({facebook_id: user.facebook_id})
-      .then(function (foundUser) {
-        if (foundUser) {
-          // res.status(200).end();
-          res.json(foundUser);
-        } else {
-          res.status(401).end();
-        }
-      })
-      .fail(function (error) {
-        next(error);
-      });
-  }
-});
-
 // Send entire user object
 app.get('/userprofile', function(req, res, next) {
   var token = req.headers['x-access-token'];
@@ -282,7 +258,7 @@ app.post('/userprofile', function(req, res, next) {
           update = Q.nbind(profiles.findAndModify, profiles);
           return update(
             { _id: foundUser._id},
-            { $set: { about: req.body.about, qustions: req.body.questions } }
+            { $set: { about: req.body.about, questions: req.body.questions } }
           );
 
           res.status(200).end();
