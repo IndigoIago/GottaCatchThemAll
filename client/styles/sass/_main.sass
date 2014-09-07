@@ -29,11 +29,21 @@ body
   100%
     -webkit-transform: scale(1)
 
+.navigation
+  height: 60px
+  width: 100%
+  top: -28%
+  position: relative
+  display: block
+  background: rgba(0, 0, 0, 0.65) 
+
 .game
   background: #FFF
+  height: 100%
 // profiles
 
 .profile-card
+  height: 768px
   .header
     height: 35px
     width: 100%
@@ -48,39 +58,44 @@ body
   .point-value
     text-align: right
   .photo
-    top: -30px
-    width: 100%
+    height: 120%
+    overflow: hidden
     img
-      width: 100%
-      margin-top: -20px
-  .progress-wrapper
-    height: 20px
-    background: #333
-    width: 100%
-    display: block
+      @include filter(blur(5px))
+      height: 100%
+      margin-top: -50px
+      left: -10px
+      position: relative
   .question-wrapper
-    text-align: center
-    font-size: 1.4em
-    padding: 2em 0
+    height: 100px
+    width: 100%
+    background: rgba(0,0,0,0.5)
+    top: -60%
 
-.question-wrapper
-  .question
-    font-weight: bold
-    margin: 1em 0
-    font-size: 1.3em
-  .answer
-    margin: 2em 0
+    .question
+      text-align: center
+      font-size: 1.5em
+      padding: 10px
+      color: #fcfcfc
 
-.answer
-  span
-    font-weight: bold
-  .yes
-    color: green
-  .no
-    color: red
+  .answer-wrapper
+    width: 100%
+    height: 100px
+    top: -60%
 
-.yes, .no
-  padding: 0 1em
-  cursor: pointer
+    .btn-option.yes, 
+    .btn-option.no
+      margin: 45px 0
 
-.yes:hover!, .no:hover!
+    .btn-option.yes 
+      background: rgba(118, 224, 112, 0.3)
+      &:hover
+        background: rgba(118, 224, 112, 0.6)
+        color: white
+
+    .btn-option.no 
+      background: rgba(255, 125, 125, 0.3)
+      &:hover
+        background: rgba(255, 125, 125, 0.6)
+        color: white
+
