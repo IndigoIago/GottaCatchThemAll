@@ -187,14 +187,12 @@ body {
 }
 /* line 68, ../sass/_main.sass */
 .profile-card .photo img {
-  -webkit-filter: blur(5px);
-  filter: blur(5px);
   height: 100%;
   margin-top: -50px;
   left: -10px;
   position: relative;
 }
-/* line 74, ../sass/_main.sass */
+/* line 73, ../sass/_main.sass */
 .profile-card .displaybar-wrapper {
   padding: 0;
   height: 100px;
@@ -202,7 +200,7 @@ body {
   background: rgba(0, 0, 0, 0.5);
   top: -60%;
 }
-/* line 81, ../sass/_main.sass */
+/* line 80, ../sass/_main.sass */
 .profile-card .displaybar-wrapper .question-wrapper {
   position: absolute;
   text-align: center;
@@ -211,31 +209,31 @@ body {
   color: #fcfcfc;
   width: 100%;
 }
-/* line 90, ../sass/_main.sass */
+/* line 89, ../sass/_main.sass */
 .profile-card .answer-wrapper {
   width: 100%;
   height: 100px;
   top: -60%;
 }
-/* line 95, ../sass/_main.sass */
+/* line 94, ../sass/_main.sass */
 .profile-card .answer-wrapper .btn-option.yes,
 .profile-card .answer-wrapper .btn-option.no {
   margin: 45px 0;
 }
-/* line 99, ../sass/_main.sass */
+/* line 98, ../sass/_main.sass */
 .profile-card .answer-wrapper .btn-option.yes {
   background: rgba(118, 224, 112, 0.3);
 }
-/* line 101, ../sass/_main.sass */
+/* line 100, ../sass/_main.sass */
 .profile-card .answer-wrapper .btn-option.yes:hover {
   background: rgba(118, 224, 112, 0.6);
   color: white;
 }
-/* line 105, ../sass/_main.sass */
+/* line 104, ../sass/_main.sass */
 .profile-card .answer-wrapper .btn-option.no {
   background: rgba(255, 125, 125, 0.3);
 }
-/* line 107, ../sass/_main.sass */
+/* line 106, ../sass/_main.sass */
 .profile-card .answer-wrapper .btn-option.no:hover {
   background: rgba(255, 125, 125, 0.6);
   color: white;

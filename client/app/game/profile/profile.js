@@ -10,6 +10,11 @@ angular.module('game.profile', []) // Load the service module as a dependancy
     });
   };
 
+  var setPhotoBlur = function (photo, amount) {
+    photo.css({
+      '-webkit-filter': 'blur(' + amount + 'px)',
+    });
+  };
 
   return {
     restrict: 'E',
@@ -22,10 +27,13 @@ angular.module('game.profile', []) // Load the service module as a dependancy
     link: function (scope, element, attrs) {
       var questionCount = scope.data.questions.length;
       var questions = scope.data.questions;
-      var questionEl = angular.element(document.querySelector('.question')); // fourth child of containing element = question wrapper (see template)
-      var progressEl = angular.element(document.querySelector('.progress-bar')); // third child of containing element, then the first child 
+      var questionEl = angular.element(document.querySelector('.question'));
+      var progressEl = angular.element(document.querySelector('.progress-bar'));
+      var photo = angular.element(document.querySelector('.photo')).find('img');
 
       scope.currentQuestion = questions.shift();
+
+      setPhotoBlur(photo, (4 * questionCount));
 
       scope.submitAnswer = function (answer) {
         var isCorrect = (answer === scope.currentQuestion.answer);
@@ -35,10 +43,13 @@ angular.module('game.profile', []) // Load the service module as a dependancy
             questionEl.text('You captured ' + scope.data.name + '!');
             scope.roundHandler({ winner: true });
           }
+
           increaseProgressBar(progressEl, questionCount, questions.length);
+          setPhotoBlur(photo, (4 * questions.length));
+
           scope.currentQuestion = questions.shift();
 
-        } else {
+        } else {  
           progressEl.css({
             transition: 'none',
             width: '100%',
