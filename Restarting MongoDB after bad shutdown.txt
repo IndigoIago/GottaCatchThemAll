@@ -1,0 +1,35 @@
+RECOVER AFTER UNEXPECTED SHUTDOWN:
+http://docs.mongodb.org/manual/tutorial/recover-data-following-unexpected-shutdown/#process
+
+PROBLEM: the Lock file is in place. Do the following:
+
+1) Remove the mongod.lock file (removing via GUI is easier)
+  rm C:/Users/Aaron/Dropbox/Programming/HackReactor/GitHub/GottaCatchThemAll/data/mongod.lock
+  (OR   C:\Users\Aaron\Dropbox\Programming\HackReactor\GitHub\GottaCatchThemAll\data\mongod.lock)
+
+1.5) Try steps below for shutting down via ADMIN.
+  
+2) Start mongod using --repair:
+  mongod --dbpath C:/Users/Aaron/Dropbox/Programming/HackReactor/GitHub/GottaCatchThemAll/data --repair
+  (OR   mongod --dbpath C:\Users\Aaron\Dropbox\Programming\HackReactor\GitHub\GottaCatchThemAll\data --repair)
+  
+3) Start mongod normally:
+  mongod --dbpath C:/Users/Aaron/Dropbox/Programming/HackReactor/GitHub/GottaCatchThemAll/data
+  (OR   mongod --dbpath C:\Users\Aaron\Dropbox\Programming\HackReactor\GitHub\GottaCatchThemAll\data)
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Shutting Down properly: <== NOTE "This fails when the database is NOT the admin database", which ours isn't. I'll keep looking... :(((
+http://docs.mongodb.org/manual/tutorial/manage-mongodb-processes/#stop-mongod-processes
+
+NOTE: This may not work...?
+
+1) Open a mongo shell
+
+2) switch to admin db:
+  use admin
+  
+3) Issue a shutdown command:
+  db.shutdownServer()

@@ -64,11 +64,9 @@ var app = express(); // the Express instance
 var bodyParser = require('body-parser'); // to get data from POST:
 var jwt = require('jwt-simple');
 var Q = require('q');
-
-var db = require('./utils'); // NOTE: might be require('/../data')
+var db = require('./utils');
 
 var defaultMessage = 'NOTE: Inside route.';
-// var utils = require('./utils'); // all in one file for now...
 
 
 /*****************
@@ -98,28 +96,76 @@ app.get('/',function(req,res){
   // should be handled by express.static(__dirname...)
 });
 
-app.get('/listDBs',function(req,res){
-  db.driver.admin.listDatabases(function(e,dbs){
-    res.json(dbs);
-  });
-}); // end get(listDBs)
+// app.get('/listDBs',function(req,res){
+//   db.driver.admin.listDatabases(function(e,dbs){
+//     res.json(dbs);
+//   });
+// }); // end get(listDBs)
 
-app.get('/collections',function(req,res){
+app.get('/collections',function(req,res){ // all the database collections in our database
   db.driver.collectionNames(function(e,names){
     res.json(names);
-  })
+  });
 }); // end get(collections)
 
 
 /*****************
- * Test query
- * Anything passed in past 'query/' will be queried as a collection
- * i.e.: 'profiles', 'San Francisco', etc.
- * try going to 'http://localhost:3003/query/profiles'
+ * Master Database Query
+ * Anything passed in past 'query/' will be queried in the 'profiles' collection
+ * i.e.: 'id', 'zip', etc.
+ * PLEASE NOTE that, at the moment, we're probably only optimized for searching by id!!!
+ * We will need a different document store (not 'profiles') for other optimized searches.
+ *
+ * EXAMPLES:
+ *
+ *   go to 'http://localhost:3003/query/id'
+ *   req._parsedUrl.pathname = /query/id
+ *   req.params.dbFieldToQuery = 'id'
+ *   req._parsedUrl.query = null
+ *
+ *   go to 'http://localhost:3003/query/id?123456'
+ *   req._parsedUrl.pathname = /query/id
+ *   req.params.dbFieldToQuery = 'id'
+ *   req._parsedUrl.query = 123456
+ *
+ *   go to 'http://localhost:3003/query/id?{id:123456}'
+ *   req._parsedUrl.pathname = /query/id
+ *   req.params.dbFieldToQuery = 'id'
+ *   req._parsedUrl.query = {id:123456}
  ****************/
-app.get('/query/:dbCollectionToQuery',function(req,res){
-  var dbCollectionToQuery = req.params.dbCollectionToQuery;
-  var collection = db.get(dbCollectionToQuery);
+app.get('/query/:dbFieldToQuery',function(req,res){
+  var dbCollectionToQuery = 'profiles'; // we only have a profiles collection for now
+  var thisPathname = req._parsedUrl.pathname;
+  var dbFieldToQuery; // empty container for field (like 'id'). Will be populated by parsing
+  var queryData; // empty container for data (like an id number). Will be populated by parsing
+
+  try { // try to parse dbFieldToQuery
+    dbFieldToQuery = JSON.parse(req.params.dbFieldToQuery);
+  } catch (er) { // can't be parsed - reassign back to req...
+    console.error('caught dbFieldToQuery error: ', er);
+    dbFieldToQuery = req.params.dbFieldToQuery;
+  }
+
+  try { // try to parse queryData
+    queryData = JSON.parse(req._parsedUrl.query);
+  } catch (er) { // can't be parsed - reassign back to req...
+    console.error('caught queryData error: ', er);
+    queryData = req._parsedUrl.query;
+  }
+
+  // console.log('typeof queryData=', typeof queryData);
+  // console.log('req._parsedUrl=', req._parsedUrl);
+  // console.log('typeof queryData=', typeof queryData);
+  // console.log('queryData=', queryData);
+  // console.log('typeof rawQuery=', typeof rawQuery);
+  // console.log('rawQuery=', rawQuery);
+
+  if (dbFieldToQuery === 'id') { // find a user by id
+    //d
+  }
+  
+
+  var collection = db.get(dbFieldToQuery);
   collection.find({},{limit:20},function(e,docs){
     res.json(docs);
   }); // end find()
@@ -218,4 +264,3 @@ app.get('/loggedin', function(req, res, next) {
 });
 
 module.exports = app; // export app for router.js
-
