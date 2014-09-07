@@ -138,23 +138,30 @@ body {
 .navigation {
   height: 60px;
   width: 100%;
-  top: -28%;
+  color: #fcfcfc;
+  top: -54%;
   position: relative;
   display: block;
   background: rgba(0, 0, 0, 0.65);
 }
+/* line 41, ../sass/_main.sass */
+.navigation > * {
+  text-align: center;
+  padding: 1em;
+  cursor: pointer;
+}
 
-/* line 40, ../sass/_main.sass */
+/* line 45, ../sass/_main.sass */
 .game {
   background: #FFF;
   height: 100%;
 }
 
-/* line 45, ../sass/_main.sass */
+/* line 50, ../sass/_main.sass */
 .profile-card {
   height: 768px;
 }
-/* line 47, ../sass/_main.sass */
+/* line 52, ../sass/_main.sass */
 .profile-card .header {
   height: 35px;
   width: 100%;
@@ -165,20 +172,20 @@ body {
   position: fixed;
   z-index: 2000;
 }
-/* line 56, ../sass/_main.sass */
+/* line 61, ../sass/_main.sass */
 .profile-card .name span {
   margin: 10px;
 }
-/* line 58, ../sass/_main.sass */
+/* line 63, ../sass/_main.sass */
 .profile-card .point-value {
   text-align: right;
 }
-/* line 60, ../sass/_main.sass */
+/* line 65, ../sass/_main.sass */
 .profile-card .photo {
   height: 120%;
   overflow: hidden;
 }
-/* line 63, ../sass/_main.sass */
+/* line 68, ../sass/_main.sass */
 .profile-card .photo img {
   -webkit-filter: blur(5px);
   filter: blur(5px);
@@ -187,45 +194,45 @@ body {
   left: -10px;
   position: relative;
 }
-/* line 69, ../sass/_main.sass */
+/* line 74, ../sass/_main.sass */
 .profile-card .question-wrapper {
   height: 100px;
   width: 100%;
   background: rgba(0, 0, 0, 0.5);
   top: -60%;
 }
-/* line 75, ../sass/_main.sass */
+/* line 80, ../sass/_main.sass */
 .profile-card .question-wrapper .question {
   text-align: center;
   font-size: 1.5em;
   padding: 10px;
   color: #fcfcfc;
 }
-/* line 81, ../sass/_main.sass */
+/* line 86, ../sass/_main.sass */
 .profile-card .answer-wrapper {
   width: 100%;
   height: 100px;
   top: -60%;
 }
-/* line 86, ../sass/_main.sass */
+/* line 91, ../sass/_main.sass */
 .profile-card .answer-wrapper .btn-option.yes,
 .profile-card .answer-wrapper .btn-option.no {
   margin: 45px 0;
 }
-/* line 90, ../sass/_main.sass */
+/* line 95, ../sass/_main.sass */
 .profile-card .answer-wrapper .btn-option.yes {
   background: rgba(118, 224, 112, 0.3);
 }
-/* line 92, ../sass/_main.sass */
+/* line 97, ../sass/_main.sass */
 .profile-card .answer-wrapper .btn-option.yes:hover {
   background: rgba(118, 224, 112, 0.6);
   color: white;
 }
-/* line 96, ../sass/_main.sass */
+/* line 101, ../sass/_main.sass */
 .profile-card .answer-wrapper .btn-option.no {
   background: rgba(255, 125, 125, 0.3);
 }
-/* line 98, ../sass/_main.sass */
+/* line 103, ../sass/_main.sass */
 .profile-card .answer-wrapper .btn-option.no:hover {
   background: rgba(255, 125, 125, 0.6);
   color: white;
