@@ -16,13 +16,18 @@
     <div class="row question">
       <span> {{currentQuestion.question}} </span>
     </div>
-    <div class="row answer">
-      <span class="yes" ng-click="submitAnswer(true)">
-        <button class='button-up-left'> Yes </button>
-      </span> or 
-      <span class="no" ng-click="submitAnswer(false)">
-        <button class='button-up-right'> No </button>
-      </span>
+  </div>
+
+  <div class="answer-wrapper col-xs-12">
+    <div class="col-xs-6">
+      <button class="btn-option yes"> Yes </button>
     </div>
-  </div> 
+    <div class="col-xs-6">
+      <button class="btn-option no"> No </button>
+    </div>
+  </div>
+
+  <div class="navigation">
+    
+  </div>
 </div>
