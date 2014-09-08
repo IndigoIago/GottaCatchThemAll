@@ -151,17 +151,17 @@ body {
   -webkit-filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.2));
 }
 
-/* line 45, ../sass/_main.sass */
+/* line 1, ../sass/_game.sass */
 .game {
   background: #FFF;
   height: 100%;
 }
 
-/* line 50, ../sass/_main.sass */
+/* line 6, ../sass/_game.sass */
 .profile-card {
   height: 768px;
 }
-/* line 52, ../sass/_main.sass */
+/* line 8, ../sass/_game.sass */
 .profile-card .header {
   height: 35px;
   width: 100%;
@@ -172,27 +172,27 @@ body {
   position: fixed;
   z-index: 2000;
 }
-/* line 61, ../sass/_main.sass */
+/* line 17, ../sass/_game.sass */
 .profile-card .name span {
   margin: 10px;
 }
-/* line 63, ../sass/_main.sass */
+/* line 19, ../sass/_game.sass */
 .profile-card .point-value {
   text-align: right;
 }
-/* line 65, ../sass/_main.sass */
+/* line 21, ../sass/_game.sass */
 .profile-card .photo {
   height: 120%;
   overflow: hidden;
 }
-/* line 68, ../sass/_main.sass */
+/* line 24, ../sass/_game.sass */
 .profile-card .photo img {
   height: 100%;
   margin-top: -50px;
   left: -10px;
   position: relative;
 }
-/* line 73, ../sass/_main.sass */
+/* line 29, ../sass/_game.sass */
 .profile-card .displaybar-wrapper {
   padding: 0;
   height: 100px;
@@ -200,7 +200,7 @@ body {
   background: rgba(0, 0, 0, 0.5);
   top: -60%;
 }
-/* line 80, ../sass/_main.sass */
+/* line 36, ../sass/_game.sass */
 .profile-card .displaybar-wrapper .question-wrapper {
   position: absolute;
   text-align: center;
@@ -209,31 +209,31 @@ body {
   color: #fcfcfc;
   width: 100%;
 }
-/* line 89, ../sass/_main.sass */
+/* line 45, ../sass/_game.sass */
 .profile-card .answer-wrapper {
   width: 100%;
   height: 100px;
   top: -60%;
 }
-/* line 94, ../sass/_main.sass */
+/* line 50, ../sass/_game.sass */
 .profile-card .answer-wrapper .btn-option.yes,
 .profile-card .answer-wrapper .btn-option.no {
   margin: 45px 0;
 }
-/* line 98, ../sass/_main.sass */
+/* line 54, ../sass/_game.sass */
 .profile-card .answer-wrapper .btn-option.yes {
   background: rgba(118, 224, 112, 0.3);
 }
-/* line 100, ../sass/_main.sass */
+/* line 56, ../sass/_game.sass */
 .profile-card .answer-wrapper .btn-option.yes:hover {
   background: rgba(118, 224, 112, 0.6);
   color: white;
 }
-/* line 104, ../sass/_main.sass */
+/* line 60, ../sass/_game.sass */
 .profile-card .answer-wrapper .btn-option.no {
   background: rgba(255, 125, 125, 0.3);
 }
-/* line 106, ../sass/_main.sass */
+/* line 62, ../sass/_game.sass */
 .profile-card .answer-wrapper .btn-option.no:hover {
   background: rgba(255, 125, 125, 0.6);
   color: white;
