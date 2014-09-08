@@ -18,7 +18,6 @@
   "dependencies": {
     "angular-ui-router": "~0.2.11",
     "bootstrap": "~3.2.0",
-    "angular-morph": "*",
     "fontawesome": "~4.2.0"
   }
 }
