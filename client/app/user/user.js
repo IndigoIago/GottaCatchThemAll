@@ -3,7 +3,7 @@ angular.module('catchem.user', ['catchem.services'])
   var myProfile = User.getPersonalProfile();
 
   var updateAbout = function(message) {
-    User.setPersonalProfile("about", message);
+    User.setPersonalProfile("aboutArea", message);
     User.savePersonalProfileToDB();
     myProfile = User.getPersonalProfile();
   };
@@ -32,21 +32,6 @@ angular.module('catchem.user', ['catchem.services'])
 .controller('UserController', ['$scope', 'User', 'UserFactory', function($scope, User, UserFactory) {
   // Is the question and answer input empty?
   $scope.blank = false;
-
-  $scope.aProfile = {
-    name: 'Douglas Crockford',
-    photo: './img/douglas_c.png',
-    about: 'I invented JavaScript. Bow down to me.',
-    questions: [
-      { question: 'Do I like JavaScript?',
-        answer: true
-      },
-      { question: 'I like incrementing numbers with "++"',
-        answer: false
-      }
-    ],
-    pointValue: 1400
-  };
 
   $scope.myProfile = UserFactory.myProfile;
 

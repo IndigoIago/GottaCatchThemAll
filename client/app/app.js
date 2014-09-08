@@ -40,7 +40,7 @@ angular.module('catchem', [
   // We add our $httpInterceptor into the array
   // of interceptors. Think of it like middleware for your ajax calls
   // [interceptors](https://github.com/angular/angular.js/blob/master/src/ng/http.js#L337)
-  // $httpProvider.interceptors.push('AttatchTokens')
+  $httpProvider.interceptors.push('AttatchTokens')
 }])
 //////////////////////////////////////////////
 // Code below from Shortly-Angular-Solution //
