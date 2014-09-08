@@ -2,8 +2,10 @@ angular.module('catchem.user', ['catchem.services'])
 .factory("UserFactory", function(User){
   var myProfile = User.getPersonalProfile();
   var updateAbout = function(message) {
+    // User.setPersonalProfile("about", message);
+    // User.savePersonalProfileToDB();
     User.setPersonalProfile("about", message);
-    User.savePersonalProfileToDB();
+    User.savePlayerProfileToDB();
     myProfile = User.getPersonalProfile();
   }; // end updateAbout(message)
 
@@ -19,7 +21,7 @@ angular.module('catchem.user', ['catchem.services'])
 
     User.setPersonalProfile("questions", myProfile.questions);
 
-    User.savePersonalProfileToDB();
+    User.savePlayerProfileToDB();
   }; // end addQuestion(question, answer)
 
   return {

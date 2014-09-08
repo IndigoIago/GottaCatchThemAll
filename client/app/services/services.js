@@ -30,36 +30,32 @@ angular.module('catchem.services', [])
       method: 'GET'
     }) // end http()
     .then(function(response) { // Success
-      console.log("Got profile!", response.data);
+      // console.log("Got profile!", response.data);
       player = response.data;
-      
-      if (!(player.collection)) { // if player has no collection object...
-        console.log('adding collection object...');
-        player.collection = {}; // add blank object
-      }
 
       return true; // for feedback in auth.js
 
     }, // end (success)
     function(response) { // optional error handling
-      console.log("Error retrieving player profile", response.data);
+      // console.log("Error retrieving player profile", response.data);
     }); // end then()
   }; // end retreivePlayerProfileFromDB()
-  // console.log('   !!! About to define player from db outside a specific function...');
+  console.log('   !!! About to define player from db outside a specific function...');
   // self.retreivePlayerProfileFromDB(); // define player by querying the db
 
   self.savePlayerProfileToDB = function() { // Save the profile to DB
+    // debugger;
     $http({
       url: '/playerProfile',
       method: 'POST',
       data: player
     }) // end http()
     .then(function(response) { // Success
-      console.log("Saved player profile.");
+      // console.log("Saved player profile.");
       return true; // not really needed except for possible error handling
     },  // end (success)
     function(response) { // optional error handling
-      console.log("Error saving player profile.", response.data);
+      // console.log("Error saving player profile.", response.data);
       return false; // not really needed except for possible error handling
     }); // end then()
   }; // end savePlayerProfileToDB()
@@ -70,7 +66,7 @@ angular.module('catchem.services', [])
 
   self.setPersonalProfile = function(key, val) { // Setter for logged in player's profile
     player[key] = val;
-    self.savePlayerProfileToDB(); // UPDATE db
+    // self.savePlayerProfileToDB(); // UPDATE db
   }; // end setPersonalProfile(key, val)
 
   self.setFullPlayerProfile = function(playerObject) { // Setter for logged in player's profile
@@ -79,28 +75,30 @@ angular.module('catchem.services', [])
   }; // end setPersonalProfile(key, val)
 
   self.getProfileCollection = function () { // Getter for logged in player's collection
-  console.log('player = ', player);
-  if (!(player.collection)) { // if no player.collection {}
-    player.collection = {};
-  }
-
+  // console.log('player = ', player);
   return player.collection;
   }; // end getProfileCollection()
 
   self.addProfileToCollection = function (capturedProfile) { // Setter to add to logged in player's collection
-  console.log('capturedProfile', capturedProfile);
+  // console.log('capturedProfile', capturedProfile);
     var capID = capturedProfile.id;
-    console.log('capID', capID);
+    var capPoints = capturedProfile.pointValue;
+    player.pointValue += capPoints;
 
-  if (!(player.collection)) { // if no player.collection {}
-    player.collection = {};
-  }
-    console.log('player', player);
+
+    // console.log('capID', capID);
+
+
+    player.collection = player.collection || {}; // add blank object
+
+    // console.log('player', player);
 
 
     // player.collection.capID = 0; // add this ID to the collection object
     player.collection[capID] = capID; // add this ID to the collection object
+    // console.log('updating DB...');
     self.savePlayerProfileToDB(); // UPDATE db
+    // console.log('DB should be updated...');
   }; // end addProfileToCollection(capturedProfile)
 
   self.getProfilesFromDB = function (numOfProfilesToGet) { // Getter for a bunch of profiles from DB
@@ -111,11 +109,11 @@ angular.module('catchem.services', [])
       method: 'GET'
     }) // end http()
     .then(function(response) { // Success
-      console.log("Got profiles:", response.data);
+      // console.log("Got profiles:", response.data);
       return response.data;
     }, // end (success)
     function(response) { // optional error handling
-      console.log("Error retrieving profiles", response.data);
+      // console.log("Error retrieving profiles", response.data);
     }); // end then()
   }; // end getProfilesFromDB()
 
@@ -161,6 +159,7 @@ angular.module('catchem.services', [])
   var profileCollection = User.getProfileCollection();
 
   self.addProfile = function (capturedProfile) {
+  var profileCollection = User.getProfileCollection();
     User.addProfileToCollection(capturedProfile);
   }; // end addProfile(profile)
 

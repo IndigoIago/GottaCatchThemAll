@@ -126,6 +126,8 @@ app.post('/login', function(req, res, next) {
   var profiles = db.get('profiles');
   var findOne = Q.nbind(profiles.findOne, profiles);
 
+  console.log("logging in");
+
   // findOne({facebook_id: fbid})
   findOne( {id: fbid} )
     .then(function(user) {
@@ -156,10 +158,10 @@ app.get('/loggedin', function(req, res, next) {
   var token = req.headers['x-access-token'];
   if (!token) {
     // next(new Error('No token'));
-    console.log('No token!');
+    // console.log('No token!');
     res.status(403).end();
   } else {
-    console.log('Token found!:', token);
+    // console.log('Token found!:', token);
 
     var user = jwt.decode(token, 'secret');
     var profiles = db.get('profiles');
@@ -168,7 +170,7 @@ app.get('/loggedin', function(req, res, next) {
     findUser( {id: user.id} )
       .then(function (foundUser) {
         if (foundUser) {
-          console.log('User found!:', foundUser);
+          // console.log('User found!:', foundUser);
           res.status(200).end();
         } else {
           res.status(401).end();
@@ -228,8 +230,8 @@ app.get('/query/:dbFieldToQuery',function(req,res){
     queryData = req._parsedUrl.query;
   }
   
-    console.log('\n\ndbFieldToQuery type = ', typeof dbFieldToQuery);
-    console.log('queryData type = ', typeof queryData, 'queryData = ', queryData, '\n\n');
+    // console.log('\n\ndbFieldToQuery type = ', typeof dbFieldToQuery);
+    // console.log('queryData type = ', typeof queryData, 'queryData = ', queryData, '\n\n');
 
   // console.log('typeof queryData=', typeof queryData);
   // console.log('req._parsedUrl=', req._parsedUrl);
@@ -297,7 +299,7 @@ app.get('/playerProfile', function(req, res, next) {
       .then(function(foundUser) {
         if (foundUser) {
           // res.status(200).end();
-          console.log("sending this obj", foundUser);
+          console.log("Server sending this obj to client", foundUser);
           res.json(foundUser);
         } else {
           res.status(401).end();
@@ -325,11 +327,19 @@ app.post('/playerProfile', function(req, res, next) {
     findUser( {id: user.id} )
       .then(function (foundUser) {
         if (foundUser) {
+          console.log("Server pulled this obj from DB in POST:", foundUser);
           // Update bio and questions
           update = Q.nbind(profiles.findAndModify, profiles);
           return update(
             { _id: foundUser._id},
-            { $set: { about: req.body.about, questions: req.body.questions } }
+            { $set: { 
+              about: req.body.about, 
+              questions: req.body.questions,
+              // photo: req.body.questions; // UNTESTED - should update photo
+              pointValue : req.body.pointValue,
+              collection : req.body.collection,     
+              visitedProfiles : req.body.visitedProfiles // Not needed, empty object is fine.
+             } }
           );
 
           res.status(200).end();
