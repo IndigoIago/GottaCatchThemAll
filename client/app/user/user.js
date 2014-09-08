@@ -36,7 +36,7 @@ angular.module('catchem.user', ['catchem.services'])
   $scope.myProfile = UserFactory.myProfile;
 
   $scope.updateAbout = function() {
-    UserFactory.updateAbout($scope.about);
+    UserFactory.updateAbout($scope.myProfile.about);
   }
 
   $scope.addQuestion = function() {
