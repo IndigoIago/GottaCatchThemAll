@@ -1,76 +1,175 @@
 // Services common across many modules
 angular.module('catchem.services', [])
 
-// Temp/placeholder User service.
+// User service for manipulating the current player's data
 .service('User', ['$rootScope', '$http', function ($rootScope, $http) {
+
+  /***********
+   * TODO: We should watch the User object...
+   * Watching User Object for changes to populate DB
+   * $rootScope.$watch(userObj, function (newVal, prevVal) {
+   *   // POST req
+   * });
+   **********/
+
+
+  /***********
+   * Player properties accessible across many scopes
+   **********/
   var self = this;
-  var profileCollection = [];
+  var player = {}; // logged in player's profile, PRIVATE in this scope
 
-  // Logged in user's profile
-  var personalProfile = {};
 
-  self.addProfileToCollection = function (profile) {
-    profileCollection.push(profile);
-  };
-
-  self.getProfileCollection = function () {
-    return profileCollection;
-  };
-
-  // Getter and Setter for Logged in user's profile
-  self.getPersonalProfile = function() {
-    return personalProfile;
-  };
-  self.setPersonalProfile = function(key, val) {
-    personalProfile[key] = val;
-  };
-
-  // Get the profile from DB
-  self.retreivePersonalProfileFromDB = function() {
+  /***************
+   * Player Methods below
+   * These should be invokable on any scope
+   **************/
+  self.retreivePlayerProfileFromDB = function() { // Get the profile from DB
     $http({
-      url: '/userprofile',
+      url: '/playerProfile',
       method: 'GET'
-    })
-    .then(function(response) {
-      // Success
-      personalProfile = response.data;
-      console.log("Got profile!", response.data);
-    }, 
-    function(response) { // optional
-      // Error
-      console.log("Error retrieving user profile");
-    });
-  };
-  self.retreivePersonalProfileFromDB();
+    }) // end http()
+    .then(function(response) { // Success
+      // console.log("Got profile!", response.data);
+      player = response.data;
 
-  // Save the profile to DB
-  self.savePersonalProfileToDB = function() {
+      return true; // for feedback in auth.js
+
+    }, // end (success)
+    function(response) { // optional error handling
+      // console.log("Error retrieving player profile", response.data);
+    }); // end then()
+  }; // end retreivePlayerProfileFromDB()
+  console.log('   !!! About to define player from db outside a specific function...');
+  // self.retreivePlayerProfileFromDB(); // define player by querying the db
+
+  self.savePlayerProfileToDB = function() { // Save the profile to DB
+    // debugger;
     $http({
-      url: '/userprofile',
+      url: '/playerProfile',
       method: 'POST',
-      data: self.getPersonalProfile()
-    })
-    .then(function(response) {
-      // Success
-      console.log("Saved user profile.");
-    }, 
-    function(response) { // optional
-      // Error
-      console.log("Error saving user profile.");
-    });
-  };
-}])
+      data: player
+    }) // end http()
+    .then(function(response) { // Success
+      // console.log("Saved player profile.");
+      return true; // not really needed except for possible error handling
+    },  // end (success)
+    function(response) { // optional error handling
+      // console.log("Error saving player profile.", response.data);
+      return false; // not really needed except for possible error handling
+    }); // end then()
+  }; // end savePlayerProfileToDB()
 
-// Collection service for adding / retrieving a users' collection
+  self.getPersonalProfile = function() { // Getter for logged in player's profile
+    return player;
+  }; // end getPersonalProfile()
+
+  self.setPersonalProfile = function(key, val) { // Setter for logged in player's profile
+    player[key] = val;
+    // self.savePlayerProfileToDB(); // UPDATE db
+  }; // end setPersonalProfile(key, val)
+
+  self.setFullPlayerProfile = function(playerObject) { // Setter for logged in player's profile
+    player = playerObject;
+    self.savePlayerProfileToDB(); // UPDATE db
+  }; // end setPersonalProfile(key, val)
+
+  self.getProfileCollection = function () { // Getter for logged in player's collection
+  // console.log('player = ', player);
+  return player.collection;
+  }; // end getProfileCollection()
+
+  self.addProfileToCollection = function (capturedProfile) { // Setter to add to logged in player's collection
+  // console.log('capturedProfile', capturedProfile);
+    var capID = capturedProfile.id;
+    var capPoints = capturedProfile.pointValue;
+    player.pointValue += capPoints;
+
+
+    // console.log('capID', capID);
+
+
+    player.collection = player.collection || {}; // add blank object
+
+    // console.log('player', player);
+
+
+    // player.collection.capID = 0; // add this ID to the collection object
+    player.collection[capID] = capID; // add this ID to the collection object
+    // console.log('updating DB...');
+    self.savePlayerProfileToDB(); // UPDATE db
+    // console.log('DB should be updated...');
+  }; // end addProfileToCollection(capturedProfile)
+
+  self.getProfilesFromDB = function (numOfProfilesToGet) { // Getter for a bunch of profiles from DB
+    var urlString = '/query/profiles?';
+    if (numOfProfilesToGet) urlString += numOfProfilesToGet;
+    $http({
+      url: urlString, // '/query/profiles?20',
+      method: 'GET'
+    }) // end http()
+    .then(function(response) { // Success
+      // console.log("Got profiles:", response.data);
+      return response.data;
+    }, // end (success)
+    function(response) { // optional error handling
+      // console.log("Error retrieving profiles", response.data);
+    }); // end then()
+  }; // end getProfilesFromDB()
+
+  /*************     NOTE: Not yet functional!     ****************
+  self.getUserByID = function(userID) { // TODO - refactor this so ID is optional?!?!?!?
+    var urlString = '/query/id?' + userID;
+    $http({
+      url: urlString,
+      method: 'GET'
+    }) // end http GET request passing JSON with id
+    .then(function(response) { // Success
+      console.log("Got profile!", response.data);
+      return response.data; // return the user with this id
+    }, // end (success)
+    function(response) { // optional error handling
+      console.log("Error retrieving player profile", response.data);
+    }); // end then()
+  }; // end getUserByID(userID)
+
+  self.updateUserByID = function(userID, jsonObjToUpdate) { // TODO - refactor this so ID is optional?!?!?!?
+    var urlString = '/query/id?' + userID;
+    $http({
+      url: urlString,
+      method: 'POST',
+      data: jsonObjToUpdate
+    }) // end http POST request passing JSON with id
+    .then(function(response) { // Success
+      console.log("Got profile!", response.data);
+      return true; // not really needed except for possible error handling
+    }, // end (success)
+    function(response) { // optional error handling
+      console.log("Error saving player profile.", response.data);
+      return false; // not really needed except for possible error handling
+    }); // end then()
+  }; // end getUserByID(userID)
+  *****************************************************/
+}]) // end .service(User)
+
+// TODO: REMOVE this block as per discussion with Jim and refactor elsewhere --- Aaron
+// Collection service for adding / retrieving a players' collection
 .service('Collection', ['$rootScope', 'User', function ($rootScope, User) {
   var self = this;
   var profileCollection = User.getProfileCollection();
 
-  self.addProfile = function (profile) {
-    User.addProfileToCollection(profile);
-  };
+  self.addProfile = function (capturedProfile) {
+  var profileCollection = User.getProfileCollection();
+    User.addProfileToCollection(capturedProfile);
+  }; // end addProfile(profile)
 
-  self.getCollection = function () {
-    return profileCollection;
-  };
-}]);
+  self.getCollection = function (playerProfile) {
+
+    
+    return User.getProfileCollection(playerProfile);
+  }; // end getCollection()
+
+  self.getDBProfiles = function(numOfProfiles) {
+    return User.getProfilesFromDB(numOfProfiles);
+  }
+}]); // end .service(Collection)
