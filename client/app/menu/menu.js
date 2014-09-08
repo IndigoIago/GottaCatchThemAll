@@ -1,6 +1,6 @@
 // Services common across many modules
-angular.module('catchem.menu', ['ui.router'])
-.controller('MenuCtrl', ['$scope', '$injector', function ($scope, $injector) {
+angular.module('catchem.menu', ['ui.router', 'catchem.auth'])
+.controller('MenuCtrl', ['$scope', '$injector', 'AuthFactory', function ($scope, $injector, AuthFactory) {
 
   // morph config
   $scope.morph = {};
@@ -26,4 +26,5 @@ angular.module('catchem.menu', ['ui.router'])
     }
   };
 
+  $scope.FBlogout = AuthFactory.FBlogout;
 }]);
