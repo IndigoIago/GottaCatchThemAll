@@ -138,12 +138,13 @@ body {
 .navigation {
   height: 60px;
   width: 100%;
+  z-index: 3000;
   color: #fcfcfc;
-  top: -54%;
-  position: relative;
+  top: 90%;
+  position: fixed;
   display: block;
 }
-/* line 40, ../sass/_main.sass */
+/* line 41, ../sass/_main.sass */
 .navigation > * {
   text-align: center;
   padding: 1em;

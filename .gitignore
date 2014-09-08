@@ -1,4 +1,5 @@
 *.DS_Store
 client/lib
+!client/lib/angular-morph.js
 node_modules
 .sass-cache
