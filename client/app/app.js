@@ -73,12 +73,12 @@ angular.module('catchem', [
   // when it does change routes, we then look for the token in localstorage
   // and send that token to the server to see if it is a real user or hasn't expired
   // if it's not valid, we then redirect back to signin/signup
-  // $rootScope.$on('$stateChangeStart', function (evt, next, current) {
-  //   if (next.controller && next.controller !== 'AuthController') {
-  //     AuthFactory.isAuth()
-  //       .catch(function () {
-  //         $state.go('login');
-  //       });
-  //   }
-  // });
+  $rootScope.$on('$stateChangeStart', function (evt, next, current) {
+    if (next.controller && next.controller !== 'AuthController') {
+      AuthFactory.isAuth()
+        .catch(function () {
+          $state.go('login');
+        });
+    }
+  });
 });
