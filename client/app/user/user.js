@@ -33,21 +33,6 @@ angular.module('catchem.user', ['catchem.services'])
   // Is the question and answer input empty?
   $scope.blank = false;
 
-  $scope.aProfile = {
-    name: 'Douglas Crockford',
-    photo: './img/douglas_c.png',
-    about: 'I invented JavaScript. Bow down to me.',
-    questions: [
-      { question: 'Do I like JavaScript?',
-        answer: true
-      },
-      { question: 'I like incrementing numbers with "++"',
-        answer: false
-      }
-    ],
-    pointValue: 1400
-  };
-
   $scope.myProfile = UserFactory.myProfile;
 
   $scope.updateAbout = function() {

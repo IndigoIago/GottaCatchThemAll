@@ -1,7 +1,7 @@
-<div class="profile-setup" data="myProfile" ng-controller="UserController">
+<div class="profile-setup" ng-controller="UserController">
 <form>
   <h2>About Me:</h2>
-  <textarea name="about" ng-model="about">{{ myProfile.about }}</textarea>
+  <textarea ng-model="myProfile.about">{{ myProfile.about }}</textarea>
   <div><button ng-click="updateAbout()">Update</button></div>
   <h2>My Questions:</h2>
   <ul>
