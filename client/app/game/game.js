@@ -25,67 +25,67 @@ angular.module('catchem.game', ['catchem.services', 'game.profile']) // Load the
   /*****************
    * GAMEPLAY FUNCTIONS
    ****************/
-<<<<<<< HEAD
-  var user1 = {
-    name: 'Douglas Crockford',
-    photo: './img/douglas_c.jpg',
-    questions: [
-      {question: 'Do I like JavaScript?', answer: true},
-      {question: 'Did I invent the Javascripts?', answer: true},
-      {question: 'Do I like incrementing numbers with "++"?', answer: false}
-    ],
-    pointValue: 1400
-  };
+// <<<<<<< HEAD
+//   var user1 = {
+//     name: 'Douglas Crockford',
+//     photo: './img/douglas_c.jpg',
+//     questions: [
+//       {question: 'Do I like JavaScript?', answer: true},
+//       {question: 'Did I invent the Javascripts?', answer: true},
+//       {question: 'Do I like incrementing numbers with "++"?', answer: false}
+//     ],
+//     pointValue: 1400
+//   };
 
-  var user2 = {
-    name: 'Charmander',
-    photo: './img/char.png',
-    questions: [{
-      question: 'Do I like fire?',
-      answer: true
-    }, {
-      question: 'Do I have issues with authority?',
-      answer: true
-    }],
-    pointValue: 600
-  };
+//   var user2 = {
+//     name: 'Charmander',
+//     photo: './img/char.png',
+//     questions: [{
+//       question: 'Do I like fire?',
+//       answer: true
+//     }, {
+//       question: 'Do I have issues with authority?',
+//       answer: true
+//     }],
+//     pointValue: 600
+//   };
 
-  var user3 = {
-    name: 'Squirtle',
-    photo: './img/squirt.png',
-    questions: [{
-      question: 'Do I like water?',
-      answer: true
-    }, {
-      question: 'Do I like sunglasses?',
-      answer: true
-    }],
-    pointValue: 260
-  };
+//   var user3 = {
+//     name: 'Squirtle',
+//     photo: './img/squirt.png',
+//     questions: [{
+//       question: 'Do I like water?',
+//       answer: true
+//     }, {
+//       question: 'Do I like sunglasses?',
+//       answer: true
+//     }],
+//     pointValue: 260
+//   };
 
-  var user4 = {
-    name: 'Bulbasaur',
-    photo: './img/Bulb.jpg',
-    questions: [{
-      question: 'Do I like grass?',
-      answer: true
-    }, {
-      question: 'Do I like fire?',
-      answer: false
-    }],
-    pointValue: 30
-  };
+//   var user4 = {
+//     name: 'Bulbasaur',
+//     photo: './img/Bulb.jpg',
+//     questions: [{
+//       question: 'Do I like grass?',
+//       answer: true
+//     }, {
+//       question: 'Do I like fire?',
+//       answer: false
+//     }],
+//     pointValue: 30
+//   };
 
 
 
-  var sampleUsers = {
-    1234561: user1, // temporarily just testing with douglas 
-    // 1234562: user2,
-    // 1234563: user3,
-    // 1234564: user4
-  };
-=======
->>>>>>> Refactor auth, login, game, svcs, user, and router to integrate modular User functions.
+//   var sampleUsers = {
+//     1234561: user1, // temporarily just testing with douglas 
+//     // 1234562: user2,
+//     // 1234563: user3,
+//     // 1234564: user4
+//   };
+// =======
+// >>>>>>> Refactor auth, login, game, svcs, user, and router to integrate modular User functions.
 
   $scope.getAProfile = function(options) {
     /*****************
@@ -201,10 +201,10 @@ angular.module('catchem.game', ['catchem.services', 'game.profile']) // Load the
 
 
 
-<<<<<<< HEAD
-var profileCollected = function() {
-}; // end profileCollection
-=======
+// <<<<<<< HEAD
+// var profileCollected = function() {
+// }; // end profileCollection
+// =======
   $scope.aProfile = $scope.playerGetsNewProfile();
 }]); // end .controller()
->>>>>>> Refactor auth, login, game, svcs, user, and router to integrate modular User functions.
+// >>>>>>> Refactor auth, login, game, svcs, user, and router to integrate modular User functions.
