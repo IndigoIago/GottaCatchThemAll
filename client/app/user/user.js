@@ -3,7 +3,7 @@ angular.module('catchem.user', ['catchem.services'])
   var myProfile = User.getPersonalProfile();
 
   var updateAbout = function(message) {
-    User.setPersonalProfile("aboutArea", message);
+    User.setPersonalProfile("about", message);
     User.savePersonalProfileToDB();
     myProfile = User.getPersonalProfile();
   };
