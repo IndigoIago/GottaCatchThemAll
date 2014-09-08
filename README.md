@@ -20,7 +20,9 @@ Meet interesting new people, capture them, and enjoy the social web you deserve.
 
 ## Usage
 
-> Some usage instructions
+Demo URL: [http://catchem.azurewebsites.net/](http://catchem.azurewebsites.net/)
+
+Login with Facebook, and click Play!
 
 ## Requirements
 
