@@ -123,8 +123,8 @@ angular.module('catchem.auth', ['catchem.services'])
         // Set web token
         $window.localStorage.setItem('com.catchemall', response.data.token);
 
-        // Redirect to play screen
-        // $state.go('play');
+        // Redirect to menu screen
+        $state.go('menu');
       }, 
       function(response) { // optional
         // Error
