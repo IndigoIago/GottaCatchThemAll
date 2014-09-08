@@ -112,7 +112,6 @@ angular.module('catchem.auth', ['catchem.services'])
       thisUser.loggedIn = true;
     } // end if (player is in DB)
 
-
     User.setFullPlayerProfile(thisUser);
     // return thisUser; // return the conformant profile object
 
