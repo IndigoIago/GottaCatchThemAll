@@ -13,11 +13,12 @@ angular.module('catchem.game', ['catchem.services', 'game.profile']) // Load the
       if (isWinner) {
         console.log('You won!');
         Collection.addProfile($scope.aProfile);
+        $scope.aProfile = playerGetsNewProfile();
+        $scope.$digest() // manually trigger digest to update next profile
       } else {
         console.log('You lost :\'(');
       } // end if (isWinner)
 
-      return $scope.aProfile.name; // send back name
     }; // end roundHandler()
   } // end controller callback()
 ]); // end .controller()
@@ -86,9 +87,9 @@ var getAProfile = function(options) {
 
   var sampleUsers = {
     1234561: user1, // temporarily just testing with douglas 
-    // 1234562: user2,
-    // 1234563: user3,
-    // 1234564: user4
+    1234562: user2,
+    1234563: user3,
+    1234564: user4
   };
 
   /*****************

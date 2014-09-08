@@ -1,6 +1,11 @@
 // Contains profile module with profile directive and controller logic
 angular.module('game.profile', []) // Load the service module as a dependancy
 .directive('profile', ['$timeout', function ($timeout) {
+  var questionCount;
+  var questions;
+  var questionEl;
+  var progressEl;
+  var photo;
 
   // helper to set progress bar percentage
   var increaseProgressBar = function (element, questionCount, questionsRemaining) {
@@ -27,18 +32,19 @@ angular.module('game.profile', []) // Load the service module as a dependancy
     templateUrl: 'app/game/profile/profile.html',
     replace: true,
     link: function (scope, element, attrs) {
-      var questionCount = scope.data.questions.length;
-      var questions = scope.data.questions;
-      var questionEl = angular.element(document.querySelector('.question'));
-      var progressEl = angular.element(document.querySelector('.progress-bar'));
-      var photo = angular.element(document.querySelector('.photo')).find('img');
+      questionCount = scope.data.questions.length;
+      questions = scope.data.questions;
+      questionEl = angular.element(document.querySelector('.question'));
+      progressEl = angular.element(document.querySelector('.progress-bar'));
+      photo = angular.element(document.querySelector('.photo')).find('img');
 
-      // get first question from questions list
-      scope.currentQuestion = questions.shift();
+      var initializeDisplay = function () {
+        scope.currentQuestion = questions.shift();
+        // Formula = 4 (arbitrary base blur amount) multiplied by the amount of questions
+        setPhotoBlur(photo, (4 * questionCount)); 
+      };
 
-      // set initial photo blur
-      // Formula = 4 (arbitrary base blur amount) multiplied by the amount of questions
-      setPhotoBlur(photo, (4 * questionCount));
+      initializeDisplay();
 
       scope.submitAnswer = function (answer) {
         var isCorrect = (answer === scope.currentQuestion.answer);
@@ -49,7 +55,16 @@ angular.module('game.profile', []) // Load the service module as a dependancy
             questionEl.text('You captured ' + scope.data.name + '!');
 
             // invoke round handler with result
-            scope.roundHandler({ winner: true });
+            setTimeout( function () {
+              questionEl.text('')
+              progressEl.css({
+                transition: 'none',
+                width: 0
+              });
+              scope.roundHandler({ winner: true });
+              initializeDisplay()
+            }, 1300)
+
           }
 
           // increase progress bar
