@@ -6,7 +6,8 @@
  ****************/
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('localhost:27017/catchem'); // TODO: update host and database name
+var mongoserver = process.env.MONGODB || 'localhost:27017/catchem';
+var db = monk(mongoserver); // TODO: update host and database name
 // var users = db.get('users');
 
 // Examples
