@@ -48,34 +48,34 @@ angular.module('catchem.user', ['catchem.services'])
   }
 
 
+  // MOVED to auth.js
+  // $scope.makeConformantProfileObject = function(user) {
+  //   if (user.pointValue > 0) { // this test will determine if this profile is already conformant
+  //     return user;
+  //   } // end if (is already conformant)
 
-  $scope.makeConformantProfileObject = function(user) {
-    if (user.pointValue > 0) { // this is already conformant
-      return user;
-    } // end if (is already conformant)
+  //   var thisUser = getNewUserTemplate(); // get an empty user/profile template object
 
-    var thisUser = getNewUserTemplate(); // get an empty user/profile template object
+  //   thisUser.id         = user.id;
+  //   thisUser.full_name  = user.full_name
+  //   thisUser.first_name = user.first_name
+  //   thisUser.last_name  = user.last_name
+  //   thisUser.email      = user.email
+  //   thisUser.gender     = user.gender
+  //   if (user.photo) {
+  //     thisUser.photo    = user.photo; // use existing photo, which must have been granted by FB API?
+  //   } else { // generate avatar for player
+  //     thisUser.photo    = './img/user_icon' + thisUser.gender.charAt(0) + (id%5) + '.png'; // generate random avatar
+  //   } // end if (photo)
+  //   thisUser.about      = 'I\'m brand new here. But I\'m here, so I have great taste!';
+  //   thisUser.pointValue = 1; // first one's free. :-D
+  //   // thisUser.questions  =      // Not needed, empty object is fine.
+  //   // thisUser.collection =      // Not needed, empty object is fine.
+  //   // thisUser.owners     =      // Not needed, empty object is fine.
+  //   // thisUser.visitedProfiles = // Not needed, empty object is fine.
 
-    thisUser.id         = user.id;
-    thisUser.full_name  = user.full_name
-    thisUser.first_name = user.first_name
-    thisUser.last_name  = user.last_name
-    thisUser.email      = user.email
-    thisUser.gender     = user.gender
-    if (user.photo) {
-      thisUser.photo    = user.photo; // use existing photo, which must have been granted by FB API?
-    } else { // generate avatar for player
-      thisUser.photo    = './img/user_icon' + thisUser.gender.charAt(0) + (id%5) + '.png'; // generate random avatar
-    } // end if (photo)
-    thisUser.about      = 'I\'m brand new here. But I\'m here, so I have great taste!';
-    thisUser.pointValue = 1; // first one's free. :-D
-    // thisUser.questions  =      // Not needed, empty object is fine.
-    // thisUser.collection =      // Not needed, empty object is fine.
-    // thisUser.owners     =      // Not needed, empty object is fine.
-    // thisUser.visitedProfiles = // Not needed, empty object is fine.
-
-    return thisUser; // return the conformant profile object
-  }; // end makeConformantProfileObject(user)
+  //   return thisUser; // return the conformant profile object
+  // }; // end makeConformantProfileObject(user)
 
 
 

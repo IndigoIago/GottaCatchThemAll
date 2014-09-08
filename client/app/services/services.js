@@ -32,17 +32,21 @@ angular.module('catchem.services', [])
     .then(function(response) { // Success
       console.log("Got profile!", response.data);
       player = response.data;
-      // TODO: fix this elsewhere!
+      
       if (!(player.collection)) { // if player has no collection object...
+        console.log('adding collection object...');
         player.collection = {}; // add blank object
       }
+
+      return true; // for feedback in auth.js
+
     }, // end (success)
     function(response) { // optional error handling
       console.log("Error retrieving player profile", response.data);
     }); // end then()
   }; // end retreivePlayerProfileFromDB()
-  console.log('   !!! About to define player from db outside a specific function...');
-  self.retreivePlayerProfileFromDB(); // define player by querying the db
+  // console.log('   !!! About to define player from db outside a specific function...');
+  // self.retreivePlayerProfileFromDB(); // define player by querying the db
 
   self.savePlayerProfileToDB = function() { // Save the profile to DB
     $http({
@@ -69,14 +73,33 @@ angular.module('catchem.services', [])
     self.savePlayerProfileToDB(); // UPDATE db
   }; // end setPersonalProfile(key, val)
 
+  self.setFullPlayerProfile = function(playerObject) { // Setter for logged in player's profile
+    player = playerObject;
+    self.savePlayerProfileToDB(); // UPDATE db
+  }; // end setPersonalProfile(key, val)
+
   self.getProfileCollection = function () { // Getter for logged in player's collection
   console.log('player = ', player);
-    return player.collection;
+  if (!(player.collection)) { // if no player.collection {}
+    player.collection = {};
+  }
+
+  return player.collection;
   }; // end getProfileCollection()
 
   self.addProfileToCollection = function (capturedProfile) { // Setter to add to logged in player's collection
+  console.log('capturedProfile', capturedProfile);
     var capID = capturedProfile.id;
-    player.collection.capID = capID; // add this ID to the collection object
+    console.log('capID', capID);
+
+  if (!(player.collection)) { // if no player.collection {}
+    player.collection = {};
+  }
+    console.log('player', player);
+
+
+    // player.collection.capID = 0; // add this ID to the collection object
+    player.collection[capID] = capID; // add this ID to the collection object
     self.savePlayerProfileToDB(); // UPDATE db
   }; // end addProfileToCollection(capturedProfile)
 
@@ -142,8 +165,9 @@ angular.module('catchem.services', [])
   }; // end addProfile(profile)
 
   self.getCollection = function (playerProfile) {
+
     
-    return User.getProfileCollection(profile);
+    return User.getProfileCollection(playerProfile);
   }; // end getCollection()
 
   self.getDBProfiles = function(numOfProfiles) {

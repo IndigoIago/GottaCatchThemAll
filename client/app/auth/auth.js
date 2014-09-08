@@ -86,17 +86,49 @@ angular.module('catchem.auth', ['catchem.services'])
   var testAPI = function() {
     // console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
-      // console.log('Response data: ', response);
-      User.setPersonalProfile("full_name", response.name);
-      User.setPersonalProfile("first_name", response.first_name);
-      User.setPersonalProfile("last_name", response.last_name);
-      User.setPersonalProfile("facebook_id", response.id);
-      User.setPersonalProfile("gender", response.gender);
-      User.setPersonalProfile("loggedIn", true);
+
+
+    var thisUser = {};
+
+    User.setPersonalProfile("id", response.id); // populate player with id
+    var retrievedPlayer = User.retreivePlayerProfileFromDB(); // get user profile from DB
+
+    if (!retrievedPlayer) { // if player is not in DB
+      thisUser.full_name  = response.full_name;
+      thisUser.first_name = response.first_name;
+      thisUser.last_name  = response.last_name;
+      thisUser.email      = response.email || "none@non.com";
+      thisUser.gender     = response.gender;
+      thisUser.photo      = './img/user_icon.png';
+      thisUser.about      = 'I\'m brand new here. But I\'m here, so I have great taste!';
+      thisUser.pointValue = 1; // first one's free. :-D
+      thisUser.collection = {};     // Not needed, empty object is fine.
+      // thisUser.questions  =      // Not needed, empty object is fine.
+      // thisUser.owners     =      // Not needed, empty object is fine.
+      // thisUser.visitedProfiles = // Not needed, empty object is fine.
+      thisUser.loggedIn = true;
+    } else { // player is in DB
+      thisUser = User.getPersonalProfile(); // get this profile
+      thisUser.loggedIn = true;
+    } // end if (player is in DB)
+
+
+    User.setFullPlayerProfile(thisUser);
+    // return thisUser; // return the conformant profile object
+
+
+
+      // // console.log('Response data: ', response);
+      // User.setPersonalProfile("full_name", response.name);
+      // User.setPersonalProfile("first_name", response.first_name);
+      // User.setPersonalProfile("last_name", response.last_name);
+      // User.setPersonalProfile("facebook_id", response.id);
+      // User.setPersonalProfile("gender", response.gender);
+      // User.setPersonalProfile("loggedIn", true);
       
-      if (response.email) {
-        User.setPersonalProfile("email", response.email);
-      }
+      // if (response.email) {
+      //   User.setPersonalProfile("email", response.email);
+      // }
 
       /*
       Send to server:
@@ -114,7 +146,8 @@ angular.module('catchem.auth', ['catchem.services'])
       $http({
         url: '/login',
         method: 'POST',
-        data: User.getPersonalProfile()
+        // data: User.getPersonalProfile()
+        data: thisUser
       })
       .then(function(response) {
         // Success
